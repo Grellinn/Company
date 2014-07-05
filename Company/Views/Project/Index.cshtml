@@ -1,0 +1,79 @@
+﻿@model PagedList.IPagedList<Company.Models.Project>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+@{
+    ViewBag.Title = "Verkefni";
+}
+
+<h2>Yfirlit yfir verkefni</h2>
+
+<p>
+    @Html.ActionLink("Skrá nýtt", "Create")
+</p>
+
+<div class="form-group">
+    @using (Html.BeginForm("Index", "Project", FormMethod.Get))
+    {
+        <p>
+            Leita eftir titli: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+            <input type="submit" value="Leita" />
+        </p>
+    }
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.ActionLink("Titill", "Index", new { sortOrder = ViewBag.TitleSortParm, currentFilter = ViewBag.CurrentFilter })
+            </th>
+            <th>
+                @Html.ActionLink("Skráð", "Index", new { sortOrder = ViewBag.RegisteredSortParm, currentFilter = ViewBag.CurrentFilter })
+            </th>
+            <th>
+                @Html.ActionLink("Staða", "Index", new { sortOrder = ViewBag.StatusSortParm, currentFilter = ViewBag.CurrentFilter })
+            </th>
+            <th>
+                @Html.ActionLink("Viðskiptavinur", "Index", new { sortOrder = ViewBag.ClientSortParm, currentFilter = ViewBag.CurrentFilter })
+            </th>
+            <th>
+                @Html.ActionLink("Heimilisfang", "Index", new { sortOrder = ViewBag.AddressSortParm, currentFilter = ViewBag.CurrentFilter })
+            </th>
+            <th>
+                @Html.ActionLink("Sími", "Index", new { sortOrder = ViewBag.PhoneSortParm, currentFilter = ViewBag.CurrentFilter })
+            </th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var project in Model)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink(project.Title, "Details/" + project.ID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => project.RegisteredDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => project.Status)
+                </td>
+                <td>
+                    @Html.ActionLink(project.Client.Name, "Details/" + project.Client.ID, "Client")
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => project.Address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => project.Client.Phone)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<br />
+Bls @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) af @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))

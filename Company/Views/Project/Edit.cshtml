@@ -1,0 +1,82 @@
+﻿@model Company.ViewModels.ProjectVM
+
+@{
+    ViewBag.Title = "Breyta";
+}
+
+<h2>Breyta</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Verkefni</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.Project.ID)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Project.Title, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Project.Title)
+                @Html.ValidationMessageFor(model => model.Project.Title)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Project.Address, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Project.Address)
+                @Html.ValidationMessageFor(model => model.Project.Address)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Project.Status, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.Project.Status, new SelectList(Model.StatusList, "ID", "Text"))
+                @Html.ValidationMessageFor(model => model.Project.Status)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Project.FinishDate, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Project.FinishDate)
+                @Html.ValidationMessageFor(model => model.Project.FinishDate)
+            </div>
+        </div>
+
+        <div class="hidden">
+            @Html.LabelFor(model => model.Project.RegisteredDate, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Project.RegisteredDate)
+                @Html.ValidationMessageFor(model => model.Project.RegisteredDate)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Project.Client, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.Project.Client.ID, new SelectList(Model.Clients, "ID", "Name"))
+                @Html.ValidationMessageFor(model => model.Project.Client)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

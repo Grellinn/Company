@@ -1,0 +1,73 @@
+﻿@model Company.Models.Project
+
+@{
+    ViewBag.Title = "Eyða";
+}
+
+<h2>Eyða</h2>
+
+<div>
+    <h4>@Model.Title</h4>
+    <h3>Ertu viss um að þú viljir eyða þessu verkefni?</h3>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RegisteredDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RegisteredDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FinishDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FinishDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Client)
+        </dt>
+
+        <dd>
+            @Html.ActionLink(Model.Client.Name, "Details/" + Model.Client.ID, "Client")
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Eyða" class="btn btn-default" /> |
+            @Html.ActionLink("Til baka í lista", "Index")
+        </div>
+    }
+</div>
