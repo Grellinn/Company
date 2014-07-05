@@ -1,28 +1,6 @@
 ﻿@model Company.Models.Client
 
 @{
-    ViewBag.Title = "Details";
-}
-
-<h2>Details</h2>
-
-<div>
-    <h4>Client</h4>
-	<hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Address)
-        </dt>
-    </dl>
-@{
     ViewBag.Title = "Yfirlit";
 }
 <div>
@@ -123,48 +101,4 @@
 </div>
 <p>
     @Html.ActionLink("Til baka í lista", "Index", "Client", new { @class = "btn btn-primary" });
-</p>
-     </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Address)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Phone)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Phone)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Registered)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Registered)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Company)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Company)
-        </dd>
-
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
 </p>
