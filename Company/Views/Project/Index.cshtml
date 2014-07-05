@@ -6,9 +6,6 @@
     ViewBag.Title = "Verkefni";
 }
 
-<div class="container">
-    <div class="row">
-        <div class="col-lg-12">
             <div class="panel">
                 <div class="panel-heading">
                     <span class="panel-title">Yfirlit yfir verkefni</span>
@@ -84,7 +81,4 @@
 
                     @Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
                 </div>
-            </div>
-                </div>
-            </div>    
             </div>

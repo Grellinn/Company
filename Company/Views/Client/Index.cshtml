@@ -7,16 +7,12 @@
 }
 
 
-
-<div class="container">
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="panel">
+<div class="panel">
                 <div class="panel-heading">
                     <span class="panel-title">Yfirlit yfir viðskiptavini</span>
                 </div>
                 <div class="panel-body">
-                    <div id="custom-search-input">
+                   <div id="custom-search-input"> 
                         <div class="input-group col-md-8">
                             <!--<input type="text" class="form-control search-query" placeholder="Leita eftir nafni..." />-->
                             @using (Html.BeginForm())
@@ -29,6 +25,7 @@
                                 </button>
                             </span>
                         </div>
+                    </div>
                         <div class="col-md-4">
                             @Html.ActionLink("Skrá nýjan", "Create", "Client", new { @class = "pull-right btn btn-primary" })
                         </div>
@@ -88,10 +85,6 @@
 
                         @Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
 
     
