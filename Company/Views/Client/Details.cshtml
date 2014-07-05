@@ -1,0 +1,170 @@
+﻿@model Company.Models.Client
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Client</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Address)
+   @model Company.Models.Client
+
+@{
+    ViewBag.Title = "Yfirlit";
+}
+<div>
+    <h2>Yfirlit <small>Viðskiptavinur</small></h2>
+    <hr />
+</div>
+
+
+<div>
+    <div class="pull-left col-xs-12 col-sm-12 col-md-6 col-lg-6 toppad">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title">@Model.Name</h3>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-3 col-lg-3 " align="center"> <img alt="User Pic" src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=100" class="img-circle"> </div>
+                    <div class=" col-md-9 col-lg-9 ">
+                        <table class="table table-user-information">
+                            <tbody>
+                                <tr>
+                                    <td>@Html.DisplayNameFor(model => model.Registered)</td>
+                                    <td>@Html.DisplayFor(model => model.Registered)</td>
+                                </tr>
+                                <tr>
+                                    <td>@Html.DisplayNameFor(model => model.Phone)</td>
+                                    <td>@Html.DisplayFor(model => model.Phone)</td>
+                                </tr>
+                                <tr>
+                                    <td>@Html.DisplayNameFor(model => model.Address)</td>
+                                    <td>@Html.DisplayFor(model => model.Address)</td>
+                                </tr>
+                                <tr>
+                                    <td>@Html.DisplayNameFor(model => model.Email)</td>
+                                    <td><a href="mailto:@Model.Email">@Html.DisplayFor(model => model.Email)</a></td>
+                                </tr>
+                                <tr>
+                                    <td>@Html.DisplayNameFor(model => model.Company)</td>
+                                    <td>@Html.DisplayFor(model => model.Company)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <a href="mailto:@Model.Email" data-original-title="Broadcast Message" data-toggle="tooltip" type="button" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-envelope"></i></a>
+                <span class="pull-right">
+                    @Html.ActionLink("Breyta viðskiptavin", "Edit/" + @Model.ID, "Client", new { @class = "btn btn-success" })
+                    @Html.ActionLink("Eyða viðskiptavin", "Delete/" + @Model.ID, "Client", new { @class = "btn btn-danger" })
+                </span>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<hr class="col-lg-12" />
+
+<ul class="nav nav-tabs" id="myTab">
+    <li class="active"><a href="#project" data-toggle="tab"><i class="fa fa-envelope-o"></i> Verkefni</a></li>
+    <!--<li><a href="#sent" data-toggle="tab"><i class="fa fa-reply-all"></i> Sent</a></li>
+    <li><a href="#assignment" data-toggle="tab"><i class="fa fa-file-text-o"></i> Assignment</a></li>
+    <li><a href="#event" data-toggle="tab"><i class="fa fa-clock-o"></i> Event</a></li>-->
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane active" id="project">
+        <a type="button" data-toggle="collapse" data-target="#a1">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Titill verkefnis</th>
+                        <th>Staða</th>
+                        <th>Skráð</th>
+                        <th>Heimilisfang</th>
+                    </tr>
+                </thead>
+                @foreach (var project in Model.Projects)
+                {
+                    <tr>
+                        <td>
+                            @Html.ActionLink(project.Title, "Details/" + project.ID, "Project")
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => project.Status)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => project.RegisteredDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => project.Address)
+                        </td>
+                    </tr>
+                }
+            </table>
+    </div>
+</div>
+<p>
+    @Html.ActionLink("Til baka í lista", "Index", "Client", new { @class = "btn btn-primary" });
+</p>
+     </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Phone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Phone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Registered)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Registered)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Company)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Company)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

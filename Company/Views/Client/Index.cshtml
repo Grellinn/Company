@@ -1,0 +1,86 @@
+﻿@model PagedList.IPagedList<Company.Models.Client>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+@{
+    ViewBag.Title = "Viðskiptavinir";
+}
+
+<h2>Yfirlit <small>yfir viðskiptavini</small><p class="pull-right">@Html.ActionLink("Skrá nýjan", "Create", "Client", new { @class = "pull-right btn btn-primary" })</p></h2>
+<hr />
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12 form-group" id="custom-search-input">
+            <div class="input-group col-md-12">
+                <!--<input type="text" class="form-control search-query" placeholder="Leita eftir nafni..." />-->
+                @using (Html.BeginForm())
+                {
+                    @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "Search form-control search-query" })
+                }
+                <span>
+                    <button class="btn btn-danger" type="button">
+                        <span class=" glyphicon glyphicon-search"></span>
+                    </button>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>
+                @Html.ActionLink("Nafn", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+            </th>
+            <th>
+                @Html.ActionLink("Sími", "Index", new { sortOrder = ViewBag.PhoneSortParm, currentFilter = ViewBag.CurrentFilter })
+            </th>
+            <th>
+                @Html.ActionLink("Tölvupóstur", "Index", new { sortOrder = ViewBag.EmailSortParm, currentFilter = ViewBag.CurrentFilter })
+            </th>
+            <th>
+                @Html.ActionLink("Heimilisfang", "Index", new { sortOrder = ViewBag.AddressSortParm, currentFilter = ViewBag.CurrentFilter })
+            </th>
+            <th>
+                @Html.ActionLink("Skráður", "Index", new { sortOrder = ViewBag.RegisteredSortParm, currentFilter = ViewBag.CurrentFilter })
+            </th>
+            <th>
+                @Html.ActionLink("Fyrirtæki", "Index", new { sortOrder = ViewBag.CompanySortParm, currentFilter = ViewBag.CurrentFilter })
+            </th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var client in Model)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink(client.Name, "Details/" + client.ID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => client.Phone)
+                </td>
+                <td>
+                    <a href="mailto:client.Email" target="_top">@Html.DisplayFor(modelItem => client.Email)</a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => client.Address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => client.Registered)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => client.Company)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<br />
+Bls @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) af @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))

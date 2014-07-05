@@ -1,0 +1,73 @@
+﻿@model Company.Models.Client
+
+@{
+    ViewBag.Title = "Eyða";
+}
+
+<h2>Eyða</h2>
+
+<div>
+    <h4>@Model.Name</h4>
+    <h3>Ertu viss um að þú viljir eyða þessum viðskiptavin?</h3>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Nafn:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            Heimilisfang:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+
+        <dt>
+            Sími:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Phone)
+        </dd>
+
+        <dt>
+            Tölvupóstur:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            Skráður:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Registered)
+        </dd>
+
+        <dt>
+            Fyrirtæki:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Company)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm("Delete", "Client", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Eyða" class="btn btn-default" /> |
+            @Html.ActionLink("Til baka í lista", "Index")
+        </div>
+    }
+</div>
