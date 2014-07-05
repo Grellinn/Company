@@ -1,71 +1,75 @@
 ﻿@model Company.ViewModels.ProjectVM
 
 @{
-    ViewBag.Title = "Skrá nýtt";
+    ViewBag.Title = "Skrá nýtt verkefni";
 }
 
-<h2>Skrá nýtt</h2>
+<div class="panel">
+    <div class="panel-heading">
+        <span class="panel-title">Skrá nýtt verkefni</span>
+    </div>
+    <div class="panel-body">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
 
+            <div class="form-horizontal">
+                <h4>Verkefni</h4>
+                <hr />
+                @Html.ValidationSummary(true)
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Project.Title, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Project.Title)
+                        @Html.ValidationMessageFor(model => model.Project.Title)
+                    </div>
+                </div>
 
-    <div class="form-horizontal">
-        <h4>Verkefni</h4>
-        <hr />
-        @Html.ValidationSummary(true)
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Project.Address, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Project.Address)
+                        @Html.ValidationMessageFor(model => model.Project.Address)
+                    </div>
+                </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Project.Title, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Project.Title)
-                @Html.ValidationMessageFor(model => model.Project.Title)
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Project.Status, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(model => model.Project.Status, new SelectList(Model.StatusList, "ID", "Text"))
+                        @Html.ValidationMessageFor(model => model.Project.Status)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Project.FinishDate, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Project.FinishDate)
+                        @Html.ValidationMessageFor(model => model.Project.FinishDate)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Project.Client, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(model => model.Project.Client.ID, new SelectList(Model.Clients, "ID", "Name"))
+                        @Html.ValidationMessageFor(model => model.Project.Client)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Stofna" class="btn btn-default" />
+                    </div>
+                </div>
             </div>
-        </div>
+        }
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Project.Address, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Project.Address)
-                @Html.ValidationMessageFor(model => model.Project.Address)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Project.Status, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.Project.Status, new SelectList(Model.StatusList, "ID", "Text"))
-                @Html.ValidationMessageFor(model => model.Project.Status)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Project.FinishDate, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Project.FinishDate)
-                @Html.ValidationMessageFor(model => model.Project.FinishDate)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Project.Client, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.Project.Client.ID, new SelectList(Model.Clients, "ID", "Name"))
-                @Html.ValidationMessageFor(model => model.Project.Client)
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Stofna" class="btn btn-default" />
-            </div>
+        <div>
+            @Html.ActionLink("Til baka í lista", "Index")
         </div>
     </div>
-}
-
-<div>
-    @Html.ActionLink("Til baka í lista", "Index")
 </div>
 
 @section Scripts {
