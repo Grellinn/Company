@@ -1,31 +1,75 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Yfirlit";
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-large">Learn more &raquo;</a></p>
-</div>
-
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+<div class="panel">
+    <div class="panel-heading">
+        <span class="panel-title">Yfirlit</span>
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+    <div class="panel-body">
+        <div class="col-sm-4">
+            <div class="stat-panel">
+                <div class="stat-row">
+                    <!-- Success darker background -->
+                    <div class="stat-cell bg-success darker">
+                        <!-- Stat panel bg icon -->
+                        <i class="fa fa-lightbulb-o bg-icon" style="font-size:60px;line-height:80px;height:80px;"></i>
+                        <!-- Big text -->
+                        <span class="text-bg">Overview</span><br>
+                        <!-- Small text -->
+                        <span class="text-sm">Your account statistics</span>
+                    </div>
+                </div> <!-- /.stat-row -->
+                <div class="stat-row">
+                    <!-- Success background, without bottom border, without padding, horizontally centered text -->
+                    <div class="stat-counters bg-success no-border-b no-padding text-center">
+                        <!-- Small padding, without horizontal padding -->
+                        <div class="stat-cell col-xs-4 padding-sm no-padding-hr">
+                            <!-- Big text -->
+                            <span class="text-bg"><strong>12</strong></span><br>
+                            <!-- Extra small text -->
+                            <span class="text-xs">PURCHASES</span>
+                        </div>
+                        <!-- Small padding, without horizontal padding -->
+                        <div class="stat-cell col-xs-4 padding-sm no-padding-hr">
+                            <!-- Big text -->
+                            <span class="text-bg"><strong>17</strong></span><br>
+                            <!-- Extra small text -->
+                            <span class="text-xs">REVIEWS</span>
+                        </div>
+                        <!-- Small padding, without horizontal padding -->
+                        <div class="stat-cell col-xs-4 padding-sm no-padding-hr">
+                            <!-- Big text -->
+                            <span class="text-bg"><strong>49</strong></span><br>
+                            <!-- Extra small text -->
+                            <span class="text-xs">LIKES</span>
+                        </div>
+                    </div> <!-- /.stat-counters -->
+                </div> <!-- /.stat-row -->
+                <div class="stat-row">
+                    <!-- Success background, without bottom border, without padding, horizontally centered text -->
+                    <div class="stat-counters bg-success no-border-b no-padding text-center">
+                        <!-- Small padding, without horizontal padding -->
+                        <div class="stat-cell col-xs-4 padding-sm no-padding-hr">
+                            <!-- Big text -->
+                            <span class="text-bg"><strong>203</strong></span><br>
+                            <!-- Extra small text -->
+                            <span class="text-xs">FRIENDS</span>
+                        </div>
+                        <div class="stat-cell col-xs-4 padding-sm no-padding-hr">
+                            <!-- Big text -->
+                            <span class="text-bg"><strong>1056</strong></span><br>
+                            <!-- Extra small text -->
+                            <span class="text-xs">POINTS</span>
+                        </div>
+                        <!-- Success background, small padding, without left and right padding, vertically centered text -->
+                        <a href="#" class="stat-cell col-xs-4 bg-success padding-sm no-padding-hr valign-middle">
+                            <!-- Extra small text -->
+                            <span class="text-xs">MORE&nbsp;&nbsp;<i class="fa fa-caret-right"></i></span>
+                        </a>
+                    </div> <!-- /.stat-counters -->
+                </div> <!-- /.stat-row -->
+            </div> <!-- /.stat-panel -->
+        </div>
     </div>
 </div>
