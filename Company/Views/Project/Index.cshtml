@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<Company.Models.Project>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Yfirlit";
 }
 
-<h2>Index</h2>
+<h2>Yfirlit</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -12,7 +12,7 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Client.Name)
+            Viðskiptavinur
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Title)
@@ -24,42 +24,20 @@
             @Html.DisplayNameFor(model => model.ZipCode)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.PhotoPath)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Details)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.OfferPrice)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.HourPrice)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.TotalPrice)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NumberOfHours)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Status)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.RegisteredDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FinishDate)
-        </th>
-        <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Client.Name)
+            @Html.ActionLink(item.Client.Name, "Details/" + item.ClientID, "Client")
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Title)
+            @Html.ActionLink(item.Title, "Details/" + item.ID)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Address)
@@ -68,36 +46,10 @@
             @Html.DisplayFor(modelItem => item.ZipCode)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.PhotoPath)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Details)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.OfferPrice)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.HourPrice)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.TotalPrice)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.NumberOfHours)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.Status)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.RegisteredDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FinishDate)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
         </td>
     </tr>
 }
