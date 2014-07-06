@@ -36,13 +36,24 @@ namespace Company.DAL
 
 			var incomes = new List<Income>
 			{
-				new Income { Description="Greiðsla fyrir reikning #123 frá húsfélagi Kleppsvegar 126", ProjectID=1, Registered=DateTime.Now, Title="Húsfélag Kleppsvegar 126 greiddi reikning"},
-				new Income { Description="Greiðsla fyrir reikning #123 frá húsfélagi Kleppsvegar 126", ProjectID=2, Registered=DateTime.Now, Title="Húsfélag Kleppsvegar 126 greiddi reikning"},
-				new Income { Description="Greiðsla fyrir reikning #123 frá húsfélagi Kleppsvegar 126", ProjectID=3, Registered=DateTime.Now, Title="Húsfélag Kleppsvegar 126 greiddi reikning"},
-				new Income { Description="Greiðsla fyrir reikning #123 frá húsfélagi Kleppsvegar 126", ProjectID=4, Registered=DateTime.Now, Title="Húsfélag Kleppsvegar 126 greiddi reikning"},
+				new Income { Description="Greiðsla fyrir reikning #123 frá húsfélagi Kleppsvegar 126", ProjectID=1, Registered=DateTime.Now, Title="Húsfélag Kleppsvegar 126 greiddi reikning", Amount=50000},
+				new Income { Description="Greiðsla fyrir reikning #123 frá húsfélagi Kleppsvegar 126", ProjectID=2, Registered=DateTime.Now, Title="Húsfélag Kleppsvegar 126 greiddi reikning", Amount=50000},
+				new Income { Description="Greiðsla fyrir reikning #123 frá húsfélagi Kleppsvegar 126", ProjectID=3, Registered=DateTime.Now, Title="Húsfélag Kleppsvegar 126 greiddi reikning", Amount=50000},
+				new Income { Description="Greiðsla fyrir reikning #123 frá húsfélagi Kleppsvegar 126", ProjectID=4, Registered=DateTime.Now, Title="Húsfélag Kleppsvegar 126 greiddi reikning", Amount=50000},
 			};
 
 			incomes.ForEach(i => dbContext.Incomes.Add(i));
+			dbContext.SaveChanges();
+
+			var expenses = new List<Expense>
+			{
+				new Expense { Title="BM Vallá", Amount=50000, Description="Útimúr", ProjectID=1, Registered=DateTime.Now},
+				new Expense { Title="BM Vallá", Amount=50000, Description="Útimúr", ProjectID=2, Registered=DateTime.Now},
+				new Expense { Title="BM Vallá", Amount=50000, Description="Útimúr", ProjectID=3, Registered=DateTime.Now},
+				new Expense { Title="BM Vallá", Amount=50000, Description="Útimúr", ProjectID=4, Registered=DateTime.Now}
+			};
+
+			expenses.ForEach(e => dbContext.Expenses.Add(e));
 			dbContext.SaveChanges();
 		}
 	}

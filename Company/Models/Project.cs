@@ -62,5 +62,8 @@ namespace Company.Models
 
 		[Display(Name = "Tekjur frá verkefni")]
 		public virtual ICollection<Income> Incomes { get; set; }
+
+		[Display(Name = "Gjöld frá verkefni")]
+		public virtual ICollection<Expense> Expenses { get; set; }
 	}
 }
