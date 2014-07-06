@@ -59,5 +59,8 @@ namespace Company.Models
 
 		[Display(Name = "Viðskiptavinur")]
 		public virtual Client Client { get; set; }
+
+		[Display(Name = "Tekjur frá verkefni")]
+		public virtual ICollection<Income> Incomes { get; set; }
 	}
 }

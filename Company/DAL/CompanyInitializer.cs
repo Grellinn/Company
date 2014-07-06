@@ -27,11 +27,22 @@ namespace Company.DAL
 			{
 				new Project { Title="Prentun á 100 stk umslög", ClientID=1, Details ="Lýsing...", FinishDate=DateTime.Parse("2014/07/06"), OfferPrice=1500000, TotalPrice=1500000, Address="Hátún 6B", ZipCode="105 RVK", Status="Lokið", RegisteredDate=DateTime.Now },
 				new Project { Title="Prentun á 100 stk umslög", ClientID=1, Details ="Lýsing...", FinishDate=DateTime.Parse("2014/07/06"), OfferPrice=1500000, TotalPrice=1500000, Address="Hátún 6B", ZipCode="105 RVK", Status="Lokið", RegisteredDate=DateTime.Now },
-				new Project { Title="Prentun á 100 stk umslög", ClientID=1, Details ="Lýsing...", FinishDate=DateTime.Parse("2014/07/06"), OfferPrice=1500000, TotalPrice=1500000, Address="Hátún 6B", ZipCode="105 RVK", Status="Lokið", RegisteredDate=DateTime.Now },
-				new Project { Title="Prentun á 100 stk umslög", ClientID=1, Details ="Lýsing...", FinishDate=DateTime.Parse("2014/07/06"), OfferPrice=1500000, TotalPrice=1500000, Address="Hátún 6B", ZipCode="105 RVK", Status="Lokið", RegisteredDate=DateTime.Now }
+				new Project { Title="Prentun á 100 stk umslög", ClientID=2, Details ="Lýsing...", FinishDate=DateTime.Parse("2014/07/06"), OfferPrice=1500000, TotalPrice=1500000, Address="Hátún 6B", ZipCode="105 RVK", Status="Lokið", RegisteredDate=DateTime.Now },
+				new Project { Title="Prentun á 100 stk umslög", ClientID=3, Details ="Lýsing...", FinishDate=DateTime.Parse("2014/07/06"), OfferPrice=1500000, TotalPrice=1500000, Address="Hátún 6B", ZipCode="105 RVK", Status="Lokið", RegisteredDate=DateTime.Now }
 			};
 
 			projects.ForEach(p => dbContext.Projects.Add(p));
+			dbContext.SaveChanges();
+
+			var incomes = new List<Income>
+			{
+				new Income { Description="Greiðsla fyrir reikning #123 frá húsfélagi Kleppsvegar 126", ProjectID=1, Registered=DateTime.Now, Title="Húsfélag Kleppsvegar 126 greiddi reikning"},
+				new Income { Description="Greiðsla fyrir reikning #123 frá húsfélagi Kleppsvegar 126", ProjectID=2, Registered=DateTime.Now, Title="Húsfélag Kleppsvegar 126 greiddi reikning"},
+				new Income { Description="Greiðsla fyrir reikning #123 frá húsfélagi Kleppsvegar 126", ProjectID=3, Registered=DateTime.Now, Title="Húsfélag Kleppsvegar 126 greiddi reikning"},
+				new Income { Description="Greiðsla fyrir reikning #123 frá húsfélagi Kleppsvegar 126", ProjectID=4, Registered=DateTime.Now, Title="Húsfélag Kleppsvegar 126 greiddi reikning"},
+			};
+
+			incomes.ForEach(i => dbContext.Incomes.Add(i));
 			dbContext.SaveChanges();
 		}
 	}

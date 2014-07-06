@@ -37,6 +37,7 @@ namespace Company.Models
 		[StringLength(20, MinimumLength = 2)]
 		public string Company { get; set; }
 
+		[Display(Name = "Verkefni viðskiptavinar")]
 		public virtual ICollection<Project> Projects { get; set; }
 	}
 }
