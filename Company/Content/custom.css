@@ -423,3 +423,19 @@ a.stat-cell:hover {
 .expense span {
     color:#FFF;
 }
+
+.client {
+    background:#f04e23;
+}
+
+.client span {
+    color:#FFF;
+}
+
+.project {
+    background:#2e3138;
+}
+
+.project span {
+    color:#FFF;
+}

@@ -83,10 +83,10 @@ namespace Company.Controllers
 					projects = projects.OrderByDescending(p => p.ZipCode).ToList();
 					break;
 				case "TotalPrice":
-					projects = projects.OrderBy(p => p.TotalPrice).ToList();
+					projects = projects.OrderBy(p => p.TotalIncome).ToList();
 					break;
 				case "totalPrice_desc":
-					projects = projects.OrderByDescending(p => p.TotalPrice).ToList();
+					projects = projects.OrderByDescending(p => p.TotalIncome).ToList();
 					break;
 				case "Status":
 					projects = projects.OrderBy(p => p.Status).ToList();

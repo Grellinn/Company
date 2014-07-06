@@ -12,17 +12,15 @@
         @Html.ActionLink("Til baka í lista", "Index", "Client", new { @class = "btn btn-default" })
         <div class="pull-right">
             <a href="mailto:@Model.Email" data-original-title="Broadcast Message" data-toggle="tooltip" type="button" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-envelope"></i></a>
-            <span class="pull-right">
-                @Html.ActionLink("Breyta viðskiptavin", "Edit/" + @Model.ID, "Client", new { @class = "btn btn-success" })
-                @Html.ActionLink("Eyða viðskiptavin", "Delete/" + @Model.ID, "Client", new { @class = "btn btn-danger" })
-            </span>
+            @Html.ActionLink("Breyta viðskiptavin", "Edit/" + @Model.ID, "Client", new { @class = "btn btn-success" })
+            @Html.ActionLink("Eyða viðskiptavin", "Delete/" + @Model.ID, "Client", new { @class = "btn btn-danger" })
         </div>
     </div>
 </div>
 
 
 <div class="panel">
-    <div class="panel-heading">
+    <div class="panel-heading client">
         <span class="panel-title">Yfirlit yfir viðskiptavin</span>
     </div>
     <div class="panel-body">
@@ -63,14 +61,6 @@
                             </div>
                         </div>
                     </div>
-                    <div class="panel-footer">
-                        <a href="mailto:@Model.Email" data-original-title="Broadcast Message" data-toggle="tooltip" type="button" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-envelope"></i></a>
-                        <span class="pull-right">
-                            @Html.ActionLink("Breyta viðskiptavin", "Edit/" + @Model.ID, "Client", new { @class = "btn btn-success" })
-                            @Html.ActionLink("Eyða viðskiptavin", "Delete/" + @Model.ID, "Client", new { @class = "btn btn-danger" })
-                        </span>
-                    </div>
-
                 </div>
             </div>
         </div>
@@ -90,12 +80,46 @@
                                             <td>@Model.Projects.Count()</td>
                                         </tr>
                                         <tr>
-                                            <td>Heildarupphæð verkefna</td>
-                                            <td>1.523.675 kr.</td>
+                                            <td>Heildartekjur verkefna</td>
+                                            <td>
+                                                @{
+                                                    int tempTotalPrice = 0;
+                                                    foreach (var project in Model.Projects)
+                                                    {
+                                                        project.TotalIncome = 0;
+                                                        foreach (var income in project.Incomes)
+                                                        {
+                                                            project.TotalIncome += income.Amount;
+                                                        }
+                                                        if (project.TotalIncome != 0)
+                                                        {
+                                                            tempTotalPrice += Convert.ToInt32(project.TotalIncome);
+                                                        }
+                                                    }
+                                                    <p>@tempTotalPrice</p>
+                                                }
+                                            </td>
                                         </tr>
                                         <tr>
-                                            <td>Meðalupphæð verkefna</td>
-                                            <td>533.520 kr.</td>
+                                            <td>Heildarkostnaður verkefna</td>
+                                            <td>
+                                                @{
+                                                    int tempTotalExpense = 0;
+                                                    foreach (var project in Model.Projects)
+                                                    {
+                                                        project.TotalExpense = 0;
+                                                        foreach (var expense in project.Expenses)
+                                                        {
+                                                            project.TotalExpense += expense.Amount;
+                                                        }
+                                                        if (project.TotalExpense != 0)
+                                                        {
+                                                            tempTotalExpense += Convert.ToInt32(project.TotalExpense);
+                                                        }
+                                                    }
+                                                    <p>@tempTotalExpense</p>
+                                                }
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>Meðallengd verkefna</td>
@@ -109,7 +133,7 @@
                                 </table>
                             </div>
                         </div>
-                    </div>ko
+                    </div>
                 </div>
             </div>
         </div>
@@ -117,82 +141,108 @@
 </div>
 
 <div class="panel">
-    <div class="panel-heading">
-        <span class="panel-title">Verkefni og tekjur</span>
+    <div class="panel-heading project">
+        <span class="panel-title">Verkefni</span>
     </div>
     <div class="panel-body">
-        <ul class="nav nav-tabs" id="myTab">
-            <li class="active"><a href="#project" data-toggle="tab">Verkefni</a></li>
-            <li><a href="#income" data-toggle="tab">Tekjur</a></li>
-        </ul>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Titill verkefnis</th>
+                    <th>Staða</th>
+                    <th>Skráð</th>
+                    <th>Heimilisfang</th>
+                </tr>
+            </thead>
+            @foreach (var project in Model.Projects)
+            {
+                <tr>
+                    <td>
+                        @Html.ActionLink(project.Title, "Details/" + project.ID, "Project")
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => project.Status)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => project.RegisteredDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => project.Address)
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
 
-        <div class="tab-content">
-            <div class="tab-pane active" id="project">
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th>Titill verkefnis</th>
-                                <th>Staða</th>
-                                <th>Skráð</th>
-                                <th>Heimilisfang</th>
-                            </tr>
-                        </thead>
-                        @foreach (var project in Model.Projects)
-                        {
-                            <tr>
-                                <td>
-                                    @Html.ActionLink(project.Title, "Details/" + project.ID, "Project")
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => project.Status)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => project.RegisteredDate)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => project.Address)
-                                </td>
-                            </tr>
-                        }
-                    </table>
-            </div>
-        
-            <div class="tab-pane" id="income">
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th>Titill</th>
-                                <th>Lýsing</th>
-                                <th>Skráð</th>
-                                <th>Verkefni</th>
-                            </tr>
-                        </thead>
-                        @foreach (var project in Model.Projects)
-                        {
-                            foreach (var income in project.Incomes)
-                            {
-                             <tr>
-                                <td>
-                                    @Html.ActionLink(income.Title, "Details/" + income.ID, "Project")
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => income.Description)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => income.Registered)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => income.Project.Title)
-                                </td>
-                            </tr>   
-                            }
-                        }
-                    </table>   
-            </div>
-            
-            <p>
-                @Html.ActionLink("Til baka í lista", "Index", "Client", new { @class = "btn btn-default" })
-            </p>
+<div class="col-lg-6">
+    <div class="panel">
+        <div class="panel-heading income">
+            <span class="panel-title">Tekjur</span>
+        </div>
+        <div class="panel-body">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Titill</th>
+                        <th>Skráð</th>
+                        <th>Upphæð</th>
+                    </tr>
+                </thead>
+                @foreach (var project in Model.Projects)
+                {
+                    foreach (var income in project.Incomes)
+                    {
+                        <tr>
+                            <td>
+                                @Html.ActionLink(income.Title, "Details/" + income.ID, "Project")
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => income.Registered)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => income.Amount)
+                            </td>
+                        </tr>
+                    }
+                }
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-6">
+    <div class="panel">
+        <div class="panel-heading expense">
+            <span class="panel-title">Gjöld</span>
+        </div>
+        <div class="panel-body">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Titill</th>
+                        <th>Skráð</th>
+                        <th>Upphæð</th>
+                    </tr>
+                </thead>
+                @foreach (var project in Model.Projects)
+                {
+                    foreach (var expense in project.Expenses)
+                    {
+                        <tr>
+                            <td>
+                                @Html.ActionLink(expense.Title, "Details/" + expense.ID, "Project")
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => expense.Registered)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => expense.Amount)
+                            </td>
+                        </tr>
+                    }
+                }
+            </table>
         </div>
     </div>
 </div>
