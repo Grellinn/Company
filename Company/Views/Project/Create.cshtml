@@ -67,16 +67,22 @@
                 </div>
 
                 <div class="form-group">
-                    @Html.LabelFor(model => model.OfferPrice, new { @class = "control-label col-md-2" })
+                    <label class="control-label col-md-2">Tilboð:</label>
                     <div class="col-md-10">
+                        <input type="checkbox" name="tilbod" />
+                    </div>
+                    <div class="col-md-10 hidden">
                         @Html.EditorFor(model => model.OfferPrice)
                         @Html.ValidationMessageFor(model => model.OfferPrice)
                     </div>
                 </div>
 
                 <div class="form-group">
-                    @Html.LabelFor(model => model.HourPrice, new { @class = "control-label col-md-2" })
+                    <label class="control-label col-md-2">Tímakaup:</label>
                     <div class="col-md-10">
+                        <input type="checkbox" name="timakaup" />
+                    </div>
+                    <div class="col-md-10 hidden">
                         @Html.EditorFor(model => model.HourPrice)
                         @Html.ValidationMessageFor(model => model.HourPrice)
                     </div>
