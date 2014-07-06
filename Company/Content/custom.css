@@ -11,6 +11,10 @@ a:hover {
     text-decoration:none;
 }
 
+td a {
+    color: #409FD0;
+}
+
 .body-content {
     padding-left:0px;
     padding-right:0px;
