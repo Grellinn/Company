@@ -10,6 +10,7 @@ namespace Company.Models
 	{
 		public int ID { get; set; }
 
+		#region properties for POST FORM
 		[Display(Name = "Titill")]
 		[Required(ErrorMessage = "Sláðu inn titil")] // Verður að taka gildi, gefur annars villumeldingu
 		[StringLength(60, MinimumLength = 3)]
@@ -37,8 +38,9 @@ namespace Company.Models
 
 		[Display(Name = "Tímaverð")]
 		public int HourPrice { get; set; }
+		#endregion
 
-
+		#region Properties that the system uses
 		[Display(Name = "Heildarverð")]
 		public int TotalPrice { get; set; }
 
@@ -53,9 +55,7 @@ namespace Company.Models
 
 		[Display(Name = "Lokið þann")]
 		public DateTime FinishDate { get; set; }
-
-
-
+		#endregion
 
 		[Display(Name = "Viðskiptavinur")]
 		public virtual Client Client { get; set; }
