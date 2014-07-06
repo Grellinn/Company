@@ -10,10 +10,10 @@
     </div>
     <div class="panel-body">
         <div>
-            <div class="pull-left col-xs-12 col-sm-12 col-md-6 col-lg-6 toppad">
-                <div class="panel panel-info">
+            <div class="pull-left col-xs-6 col-sm-6 col-md-6 col-lg-6 toppad">
+                <div>
                     <div class="panel-heading">
-                        <h3 class="panel-title">@Model.Name</h3>
+                        <h3 class="panel-title"><strong>@Model.Name</strong></h3>
                     </div>
                     <div class="panel-body">
                         <div class="row">
@@ -51,6 +51,52 @@
                         <span class="pull-right">
                             @Html.ActionLink("Breyta viðskiptavin", "Edit/" + @Model.ID, "Client", new { @class = "btn btn-success" })
                             @Html.ActionLink("Eyða viðskiptavin", "Delete/" + @Model.ID, "Client", new { @class = "btn btn-danger" })
+                        </span>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="pull-left col-xs-6 col-sm-6 col-md-6 col-lg-6 toppad">
+                <div>
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><strong>@Html.DisplayFor(model => model.Company)</strong></h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class=" col-md-12 col-lg-12 ">
+                                <table class="table table-user-information">
+                                    <tbody>
+                                        <tr>
+                                            <td>Fjöldi verkefna</td>
+                                            <td>3</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Heildarupphæð verkefna</td>
+                                            <td>1.523.675 kr.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Meðalupphæð verkefna</td>
+                                            <td>533.520 kr.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Meðallengd verkefna</td>
+                                            <td>3 vikur</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Eitthvað annað</td>
+                                            <td>225.500 kr.</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <span class="pull-right">
+                            @Html.ActionLink("Skoða öll verkefni", "Edit/" + @Model.ID, "Client", new { @class = "btn btn-default" })
+                            @Html.ActionLink("Skoða tölfræði", "Delete/" + @Model.ID, "Client", new { @class = "btn btn-default" })
                         </span>
                     </div>
 
@@ -100,7 +146,7 @@
             </div>
         </div>
         <p>
-            @Html.ActionLink("Til baka í lista", "Index", "Client", new { @class = "btn btn-primary" })
+            @Html.ActionLink("Til baka í lista", "Index", "Client", new { @class = "btn btn-default" })
         </p>
     </div>
 </div>

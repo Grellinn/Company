@@ -1,73 +1,75 @@
 ﻿@model Company.Models.Client
 
 @{
-    ViewBag.Title = "Eyða";
+    ViewBag.Title = "Eyða viðskiptavin";
 }
 
-<h2>Eyða</h2>
+<div class="panel">
+    <div class="panel-heading">
+        <span class="panel-title">Eyða viðskiptavini</span>
+    </div>
+    <div class="panel-body">
+            <h3>Ertu viss um að þú viljir eyða @Model.Name ?</h3>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    Nafn:
+                </dt>
 
-<div>
-    <h4>@Model.Name</h4>
-    <h3>Ertu viss um að þú viljir eyða þessum viðskiptavin?</h3>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            Nafn:
-        </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Name)
+                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
+                <dt>
+                    Heimilisfang:
+                </dt>
 
-        <dt>
-            Heimilisfang:
-        </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Address)
+                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Address)
-        </dd>
+                <dt>
+                    Sími:
+                </dt>
 
-        <dt>
-            Sími:
-        </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Phone)
+                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Phone)
-        </dd>
+                <dt>
+                    Tölvupóstur:
+                </dt>
 
-        <dt>
-            Tölvupóstur:
-        </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Email)
+                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
+                <dt>
+                    Skráður:
+                </dt>
 
-        <dt>
-            Skráður:
-        </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Registered)
+                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Registered)
-        </dd>
+                <dt>
+                    Fyrirtæki:
+                </dt>
 
-        <dt>
-            Fyrirtæki:
-        </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Company)
+                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Company)
-        </dd>
+            </dl>
 
-    </dl>
+            @using (Html.BeginForm("Delete", "Client", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
 
-    @using (Html.BeginForm("Delete", "Client", FormMethod.Post))
-    {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Eyða" class="btn btn-default" /> |
-            @Html.ActionLink("Til baka í lista", "Index")
-        </div>
-    }
+                <div class="form-actions no-color">
+                    <input type="submit" value="Eyða" class="btn btn-default" />
+                </div>
+            }
+        <div class="pull-left">@Html.ActionLink("Til baka í lista", "Index")</div>
+    </div>
 </div>
