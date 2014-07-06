@@ -2,6 +2,15 @@
     background:#EDECE7;
 }
 
+a {
+    color:#F65D35;
+}
+
+a:hover {
+    color:#6d6363;
+    text-decoration:none;
+}
+
 .body-content {
     padding-left:0px;
     padding-right:0px;
