@@ -106,20 +106,12 @@ namespace Company.Controllers
 			return View(projects.ToPagedList(pageNumber, pageSize));
         }
 
-        /*// GET: /Project/Details/5
-        public ActionResult Details(int? id)
+        // GET: /Project/Details/5
+        public ActionResult Details(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Project project = db.Projects.Find(id);
-            if (project == null)
-            {
-                return HttpNotFound();
-            }
+			Project project = projectRepo.GetProjectByID(id);
             return View(project);
-        }*/
+        }
 
         // GET: /Project/Create
         public ActionResult Create()
