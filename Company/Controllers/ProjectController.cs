@@ -139,18 +139,10 @@ namespace Company.Controllers
         }
 
         // GET: /Project/Edit/5
-        /*public ActionResult Edit(int? id)
+        public ActionResult Edit(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Project project = db.Projects.Find(id);
-            if (project == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.ClientID = new SelectList(db.Clients, "ID", "Name", project.ClientID);
+			Project project = projectRepo.GetProjectByID(id);
+            ViewBag.ClientID = new SelectList(clientRepo.GetClients(), "ID", "Name", project.ClientID);
             return View(project);
         }
 
@@ -163,26 +155,18 @@ namespace Company.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(project).State = EntityState.Modified;
-                db.SaveChanges();
+				projectRepo.UpdateProject(project);
+				projectRepo.Save();
                 return RedirectToAction("Index");
             }
-            ViewBag.ClientID = new SelectList(db.Clients, "ID", "Name", project.ClientID);
+            ViewBag.ClientID = new SelectList(clientRepo.GetClients(), "ID", "Name", project.ClientID);
             return View(project);
         }
 
         // GET: /Project/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Project project = db.Projects.Find(id);
-            if (project == null)
-            {
-                return HttpNotFound();
-            }
+			Project project = projectRepo.GetProjectByID(id);
             return View(project);
         }
 
@@ -191,11 +175,11 @@ namespace Company.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Project project = db.Projects.Find(id);
-            db.Projects.Remove(project);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }*/
+			Project project = projectRepo.GetProjectByID(id);
+			projectRepo.DeleteProject(id);
+			projectRepo.Save();
+			return RedirectToAction("Index");
+        }
 
         protected override void Dispose(bool disposing)
         {

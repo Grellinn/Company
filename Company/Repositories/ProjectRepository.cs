@@ -42,32 +42,7 @@ namespace Company.Repositories
 
 		public void UpdateProject(Project project)
 		{
-			//context.Entry(project).State = EntityState.Modified;
-			Client tempClient = this.context.Clients.Where(c => c.ID == project.Client.ID).SingleOrDefault();
-			Project projectToAdd = GetProjectByID(project.ID);
-
-			projectToAdd.Title = project.Title;
-			projectToAdd.Status = project.Status;
-			projectToAdd.FinishDate = project.FinishDate;
-			projectToAdd.Address = project.Address;
-
-			// Á kannski ekki að vera...
-			context.Entry(projectToAdd).State = EntityState.Modified;
-		}
-
-		public Project CreateProjectToInsert(Project project)
-		{
-			Project projectToAdd = new Project();
-
-			#region Fylla inn upplýsingar um verkefni
-			projectToAdd.Title = project.Title;
-			projectToAdd.Status = project.Status;
-			projectToAdd.RegisteredDate = DateTime.Now;
-			projectToAdd.FinishDate = project.FinishDate;
-			projectToAdd.Address = project.Address;
-			#endregion
-
-			return projectToAdd;
+			context.Entry(project).State = EntityState.Modified;
 		}
 
 		public void Save()
