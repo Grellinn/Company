@@ -1,50 +1,55 @@
 ﻿@model Company.Models.Income
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Upplýsingar um tekjur";
 }
 
-<h2>Details</h2>
+<div class="panel">
+    <div class="panel-heading">
+        <span class="panel-title">
+            <span class="panel-title">
+                Upplýsingar um tekjur
+            </span>
+        </span>
+    </div>
+    <div class="panel-body">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Project.Title)
+            </dt>
 
-<div>
-    <h4>Income</h4>
-	<hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Project.Title)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Project.Title)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Project.Title)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Title)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Title)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Description)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Description)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Registered)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Registered)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Registered)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Registered)
-        </dd>
-
-    </dl>
+        </dl>
+        <p>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+            @Html.ActionLink("Back to List", "Index")
+        </p>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

@@ -20,6 +20,10 @@ td a {
     padding-right:0px;
 }
 
+.tab-content {
+    margin-top:15px;
+}
+
 .navbar-inverse .navbar-brand {
     color:#FFF;
     font-size:18px;
@@ -402,4 +406,20 @@ a.stat-cell:hover {
     outline: 0;
     -webkit-box-shadow: none;
     box-shadow: none;
+}
+
+.income {
+    background:#1FBBA6;
+}
+
+.income span {
+    color:#FFF;
+}
+
+.expense {
+    background:#d9534f;
+}
+
+.expense span {
+    color:#FFF;
 }
