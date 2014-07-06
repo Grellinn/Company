@@ -18,6 +18,10 @@
     margin-right:15px;
 }
 
+.navbar-brand:focus {
+    background:#F65D35;
+}
+
 .navbar-inverse {
     background-color: #433D3C;
     border-color: #433D3C;
