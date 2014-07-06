@@ -1,57 +1,87 @@
-﻿@model IEnumerable<Company.Models.Project>
+﻿@model PagedList.IPagedList<Company.Models.Project>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
 @{
-    ViewBag.Title = "Yfirlit";
+    ViewBag.Title = "Verkefni";
 }
 
-<h2>Yfirlit</h2>
+<div class="panel">
+    <div class="panel-heading">
+        <span class="panel-title">Yfirlit yfir viðskiptavini</span>
+    </div>
+    <div class="panel-body">
+        <div id="custom-search-input">
+            <div class="input-group col-md-8">
+                <!--<input type="text" class="form-control search-query" placeholder="Leita eftir nafni..." />-->
+                @using (Html.BeginForm())
+                {
+                    @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "Search form-control search-query" })
+                }
+                <span>
+                    <button class="btn btn-danger" type="button">
+                        <span class=" glyphicon glyphicon-search"></span>
+                    </button>
+                </span>
+            </div>
+        </div>
+        <div class="col-md-4">
+            @Html.ActionLink("Skrá nýtt verkefni", "Create", "Project", new { @class = "pull-right btn btn-primary" })
+        </div>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.ActionLink("Titill", "Index", new { sortOrder = ViewBag.TitleSortParm, currentFilter = ViewBag.CurrentFilter })
+                    </th>
+                    <th>
+                        @Html.ActionLink("Viðskiptavinur", "Index", new { sortOrder = ViewBag.TitleSortParm, currentFilter = ViewBag.CurrentFilter })
+                    </th>
+                    <th>
+                        @Html.ActionLink("Heimilisfang", "Index", new { sortOrder = ViewBag.AddressSortParm, currentFilter = ViewBag.CurrentFilter })
+                    </th>
+                    <th>
+                        @Html.ActionLink("Póst nr.", "Index", new { sortOrder = ViewBag.ZipCodeSortParm, currentFilter = ViewBag.CurrentFilter })
+                    </th>
+                    <th>
+                        @Html.ActionLink("Heildar verð", "Index", new { sortOrder = ViewBag.TotalPriceSortParm, currentFilter = ViewBag.CurrentFilter })
+                    </th>
+                    <th>
+                        @Html.ActionLink("Staða", "Index", new { sortOrder = ViewBag.StatusSortParm, currentFilter = ViewBag.CurrentFilter })
+                    </th>
+                </tr>
+            </thead>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            Viðskiptavinur
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Address)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ZipCode)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TotalPrice)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Status)
-        </th>
-    </tr>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.ActionLink(item.Title, "Details/" + item.ID)
+                        </td>
+                        <td>
+                            @Html.ActionLink(item.Client.Name, "Details/" + item.ClientID, "Client")
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Address)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ZipCode)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TotalPrice)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Status)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.ActionLink(item.Client.Name, "Details/" + item.ClientID, "Client")
-        </td>
-        <td>
-            @Html.ActionLink(item.Title, "Details/" + item.ID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Address)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ZipCode)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TotalPrice)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Status)
-        </td>
-    </tr>
-}
+        <br />
+        Bls @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) af @Model.PageCount
 
-</table>
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+    </div>
+</div>

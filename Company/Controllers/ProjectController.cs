@@ -8,21 +8,103 @@ using System.Web;
 using System.Web.Mvc;
 using Company.Models;
 using Company.DAL;
+using Company.Repositories;
+using PagedList;
 
 namespace Company.Controllers
 {
     public class ProjectController : Controller
     {
-        private CompanyContext db = new CompanyContext();
+		private IProjectRepository projectRepo;
+
+		public ProjectController()
+		{
+			this.projectRepo = new ProjectRepository(new CompanyContext());
+		}
 
         // GET: /Project/
-        public ActionResult Index()
+		public ActionResult Index(string sortOrder, string searchString, string currentFilter, int? page)
         {
-            var projects = db.Projects.Include(p => p.Client);
-            return View(projects.ToList());
+			var projects = projectRepo.GetProjects();
+
+			#region leitarvél
+			if (!String.IsNullOrEmpty(searchString))
+			{
+				projects = projects.Where(p => p.Title.ToUpper().Contains(searchString.ToUpper()) || p.Title.ToUpper().Contains(searchString.ToUpper())).ToList();
+			}
+			#endregion
+
+			#region ViewBags
+			ViewBag.CurrentSort = sortOrder;
+			ViewBag.ClientSortParm = String.IsNullOrEmpty(sortOrder) ? "client_desc" : "";
+			ViewBag.TitleSortParm = sortOrder == "Title" ? "title_desc" : "Title";
+			ViewBag.AddressSortParm = sortOrder == "Address" ? "address_desc" : "Address";
+			ViewBag.ZipCodeSortParm = sortOrder == "ZipCode" ? "zipCode_desc" : "ZipCode";
+			ViewBag.TotalPriceSortParm = sortOrder == "TotalPrice" ? "totalPrice_desc" : "TotalPrice";
+			ViewBag.StatusSortParm = sortOrder == "Status" ? "status_desc" : "Status";
+
+			if (searchString != null)
+			{
+				page = 1;
+			}
+			else
+			{
+				searchString = currentFilter;
+			}
+
+			ViewBag.CurrentFilter = searchString;
+
+			#endregion
+
+			#region switch for sortOrder
+			switch (sortOrder)
+			{
+				case "client_desc":
+					projects = projects.OrderByDescending(p => p.Client.Name).ToList();
+					break;
+				case "Title":
+					projects = projects.OrderBy(p => p.Title).ToList();
+					break;
+				case "title_desc":
+					projects = projects.OrderByDescending(p => p.Title).ToList();
+					break;
+				case "Address":
+					projects = projects.OrderBy(p => p.Address).ToList();
+					break;
+				case "address_desc":
+					projects = projects.OrderByDescending(p => p.Address).ToList();
+					break;
+				case "ZipCode":
+					projects = projects.OrderBy(p => p.ZipCode).ToList();
+					break;
+				case "zipCode_desc":
+					projects = projects.OrderByDescending(p => p.ZipCode).ToList();
+					break;
+				case "TotalPrice":
+					projects = projects.OrderBy(p => p.TotalPrice).ToList();
+					break;
+				case "totalPrice_desc":
+					projects = projects.OrderByDescending(p => p.TotalPrice).ToList();
+					break;
+				case "Status":
+					projects = projects.OrderBy(p => p.Status).ToList();
+					break;
+				case "status_desc":
+					projects = projects.OrderByDescending(p => p.Status).ToList();
+					break;
+				default:
+					projects = projects.OrderBy(p => p.Client.Name).ToList();
+					break;
+			}
+			#endregion
+
+
+			int pageSize = 10;
+			int pageNumber = (page ?? 1);
+			return View(projects.ToPagedList(pageNumber, pageSize));
         }
 
-        // GET: /Project/Details/5
+        /*// GET: /Project/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -119,13 +201,13 @@ namespace Company.Controllers
             db.Projects.Remove(project);
             db.SaveChanges();
             return RedirectToAction("Index");
-        }
+        }*/
 
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
-                db.Dispose();
+                projectRepo.Dispose();
             }
             base.Dispose(disposing);
         }
