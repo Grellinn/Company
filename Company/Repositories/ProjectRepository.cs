@@ -24,11 +24,6 @@ namespace Company.Repositories
 			return context.Projects.ToList();
 		}
 
-		public List<Status> GetStatusList()
-		{
-			return context.StatusList.ToList();
-		}
-
 		public Project GetProjectByID(int id)
 		{
 			return context.Projects.Find(id);
@@ -56,10 +51,6 @@ namespace Company.Repositories
 			projectToAdd.FinishDate = project.FinishDate;
 			projectToAdd.Address = project.Address;
 
-			// Skipta status ID út fyrir status Name
-			int tempStatusID = Convert.ToInt32(project.Status);
-			projectToAdd.Status = this.context.StatusList.Where(s => s.ID == tempStatusID).SingleOrDefault().Text;
-
 			// Á kannski ekki að vera...
 			context.Entry(projectToAdd).State = EntityState.Modified;
 		}
@@ -74,10 +65,6 @@ namespace Company.Repositories
 			projectToAdd.RegisteredDate = DateTime.Now;
 			projectToAdd.FinishDate = project.FinishDate;
 			projectToAdd.Address = project.Address;
-
-			// Skipta status ID út fyrir status Name
-			int tempStatusID = Convert.ToInt32(project.Status);
-			projectToAdd.Status = this.context.StatusList.Where(s => s.ID == tempStatusID).SingleOrDefault().Text;
 			#endregion
 
 			return projectToAdd;

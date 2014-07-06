@@ -11,7 +11,6 @@ namespace Company.ViewModels
 	{
 		public Project Project { get; set; }
 		public List<Client> Clients { get; set; }
-		public List<Status> StatusList { get; set; }
 
 		private IClientRepository clientRepo;
 		private IProjectRepository projectRepo;
@@ -21,7 +20,6 @@ namespace Company.ViewModels
 			this.clientRepo = new ClientRepository(new DAL.CompanyContext());
 			this.projectRepo = new ProjectRepository(new DAL.CompanyContext());
 			this.Clients = clientRepo.GetClients().ToList();
-			this.StatusList = projectRepo.GetStatusList().ToList();
 			this.Project = new Project();
 			this.Project.Client = new Client();
 		}

@@ -25,25 +25,13 @@ namespace Company.DAL
 
 			var projects = new List<Project>
 			{
-				new Project { Title="Prentun á 100 stk umslög", Status="Lokið", RegisteredDate=DateTime.Now },
-				new Project { Title="Prentun á 100 stk umslög", Status="Lokið", RegisteredDate=DateTime.Now },
-				new Project { Title="Setja upp vefsíðu", Status="Lokið", RegisteredDate=DateTime.Now },
-				new Project { Title="Setja upp vefsíðu", Status="Lokið", RegisteredDate=DateTime.Now },
-				new Project { Title="Hönnun og prentun á nafnspjöld", Status="Lokið", RegisteredDate=DateTime.Now },
-				new Project { Title="Hönnun og prentun á nafnspjöld", Status="Lokið", RegisteredDate=DateTime.Now }
+				new Project { Title="Prentun á 100 stk umslög", ClientID=1, Details ="Lýsing...", FinishDate=DateTime.Parse("2014/07/06"), OfferPrice=1500000, TotalPrice=1500000, Address="Hátún 6B", ZipCode="105 RVK", Status="Lokið", RegisteredDate=DateTime.Now },
+				new Project { Title="Prentun á 100 stk umslög", ClientID=1, Details ="Lýsing...", FinishDate=DateTime.Parse("2014/07/06"), OfferPrice=1500000, TotalPrice=1500000, Address="Hátún 6B", ZipCode="105 RVK", Status="Lokið", RegisteredDate=DateTime.Now },
+				new Project { Title="Prentun á 100 stk umslög", ClientID=1, Details ="Lýsing...", FinishDate=DateTime.Parse("2014/07/06"), OfferPrice=1500000, TotalPrice=1500000, Address="Hátún 6B", ZipCode="105 RVK", Status="Lokið", RegisteredDate=DateTime.Now },
+				new Project { Title="Prentun á 100 stk umslög", ClientID=1, Details ="Lýsing...", FinishDate=DateTime.Parse("2014/07/06"), OfferPrice=1500000, TotalPrice=1500000, Address="Hátún 6B", ZipCode="105 RVK", Status="Lokið", RegisteredDate=DateTime.Now }
 			};
 
 			projects.ForEach(p => dbContext.Projects.Add(p));
-			dbContext.SaveChanges();
-
-			var statusList = new List<Status>
-			{
-				new Status { ID=1, Text="Lokið"},
-				new Status { ID=1, Text="Ólokið"},
-				new Status { ID=1, Text="Ekki hafið"}
-			};
-
-			statusList.ForEach(s => dbContext.StatusList.Add(s));
 			dbContext.SaveChanges();
 		}
 	}

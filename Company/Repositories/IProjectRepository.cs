@@ -10,7 +10,6 @@ namespace Company.Repositories
 	public interface IProjectRepository : IDisposable
 	{
 		List<Project> GetProjects();
-		List<Status> GetStatusList();
 		Project GetProjectByID(int projectId);
 		void InsertProject(Project project);
 		void DeleteProject(int projectID);

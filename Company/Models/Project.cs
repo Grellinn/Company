@@ -11,7 +11,7 @@ namespace Company.Models
 		public int ID { get; set; }
 
 		[Display(Name = "Titill")]
-		[Required(ErrorMessage = "Vinsamlegast sláðu inn titil")] // Verður að taka gildi, gefur annars villumeldingu
+		[Required(ErrorMessage = "Sláðu inn titil")] // Verður að taka gildi, gefur annars villumeldingu
 		[StringLength(60, MinimumLength = 3)]
 		public string Title { get; set; }
 
@@ -19,17 +19,43 @@ namespace Company.Models
 		[StringLength(60, MinimumLength = 3)]
 		public string Address { get; set; }
 
-		[Display(Name = "Staða")]
-		[Required(ErrorMessage = "Vinsamlegast veldu stöðu")] // Verður að taka gildi, gefur annars villumeldingu
-		public string Status { get; set; }
+		[Display(Name = "Póstnúmer")]
+		public string ZipCode { get; set; }
 
+		[Display(Name = "Mynd")]
 		public string PhotoPath { get; set; }
 
-		[Display(Name = "Skrá")]
+		[Display(Name = "Viðskiptavinur")]
+		[Required(ErrorMessage = "Veldu viðskiptavin")]
+		public int ClientID { get; set; }
+
+		[Display(Name = "Upplýsingar")]
+		public string Details { get; set; }
+
+		[Display(Name = "Tilboðsverð")]
+		public int OfferPrice { get; set; }
+
+		[Display(Name = "Tímaverð")]
+		public int HourPrice { get; set; }
+
+
+		[Display(Name = "Heildarverð")]
+		public int TotalPrice { get; set; }
+
+		[Display(Name = "Heildarfjöldi tíma")]
+		public int NumberOfHours { get; set; }
+		
+		[Display(Name = "Staða")]
+		public string Status { get; set; }
+
+		[Display(Name = "Skráð")]
 		public DateTime RegisteredDate { get; set; }
 
 		[Display(Name = "Lokið þann")]
 		public DateTime FinishDate { get; set; }
+
+
+
 
 		[Display(Name = "Viðskiptavinur")]
 		public virtual Client Client { get; set; }
