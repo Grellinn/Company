@@ -16,10 +16,12 @@ namespace Company.Controllers
     public class ProjectController : Controller
     {
 		private IProjectRepository projectRepo;
+		private IClientRepository clientRepo;
 
 		public ProjectController()
 		{
 			this.projectRepo = new ProjectRepository(new CompanyContext());
+			this.clientRepo = new ClientRepository(new CompanyContext());
 		}
 
         // GET: /Project/
@@ -117,12 +119,12 @@ namespace Company.Controllers
                 return HttpNotFound();
             }
             return View(project);
-        }
+        }*/
 
         // GET: /Project/Create
         public ActionResult Create()
         {
-            ViewBag.ClientID = new SelectList(db.Clients, "ID", "Name");
+            ViewBag.ClientID = new SelectList(clientRepo.GetClients(), "ID", "Name");
             return View();
         }
 
@@ -135,17 +137,17 @@ namespace Company.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Projects.Add(project);
-                db.SaveChanges();
+				projectRepo.InsertProject(project);
+				projectRepo.Save();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ClientID = new SelectList(db.Clients, "ID", "Name", project.ClientID);
+            ViewBag.ClientID = new SelectList(clientRepo.GetClients(), "ID", "Name", project.ClientID);
             return View(project);
         }
 
         // GET: /Project/Edit/5
-        public ActionResult Edit(int? id)
+        /*public ActionResult Edit(int? id)
         {
             if (id == null)
             {
