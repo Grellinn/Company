@@ -1,84 +1,105 @@
-﻿@model PagedList.IPagedList<Company.Models.Project>
-@using PagedList.Mvc;
-<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+﻿@model IEnumerable<Company.Models.Project>
 
 @{
-    ViewBag.Title = "Verkefni";
+    ViewBag.Title = "Index";
 }
 
-            <div class="panel">
-                <div class="panel-heading">
-                    <span class="panel-title">Yfirlit yfir verkefni</span>
-                </div>
-                <div class="panel-body">
-                    <p>
-                        @Html.ActionLink("Skrá nýtt verkefni", "Create", "Project", new { @class = "pull-right btn btn-primary" })
-                    </p>
+<h2>Index</h2>
 
-                    <div class="form-group">
-                        @using (Html.BeginForm("Index", "Project", FormMethod.Get))
-                        {
-                            <p>
-                                Leita eftir titli: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
-                                <input type="submit" value="Leita" />
-                            </p>
-                        }
-                    </div>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Client.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Address)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ZipCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PhotoPath)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Details)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OfferPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HourPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NumberOfHours)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RegisteredDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FinishDate)
+        </th>
+        <th></th>
+    </tr>
 
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>
-                                    @Html.ActionLink("Titill", "Index", new { sortOrder = ViewBag.TitleSortParm, currentFilter = ViewBag.CurrentFilter })
-                                </th>
-                                <th>
-                                    @Html.ActionLink("Skráð", "Index", new { sortOrder = ViewBag.RegisteredSortParm, currentFilter = ViewBag.CurrentFilter })
-                                </th>
-                                <th>
-                                    @Html.ActionLink("Staða", "Index", new { sortOrder = ViewBag.StatusSortParm, currentFilter = ViewBag.CurrentFilter })
-                                </th>
-                                <th>
-                                    @Html.ActionLink("Viðskiptavinur", "Index", new { sortOrder = ViewBag.ClientSortParm, currentFilter = ViewBag.CurrentFilter })
-                                </th>
-                                <th>
-                                    @Html.ActionLink("Heimilisfang", "Index", new { sortOrder = ViewBag.AddressSortParm, currentFilter = ViewBag.CurrentFilter })
-                                </th>
-                                <th>
-                                    @Html.ActionLink("Sími", "Index", new { sortOrder = ViewBag.PhoneSortParm, currentFilter = ViewBag.CurrentFilter })
-                                </th>
-                            </tr>
-                        </thead>
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Client.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Address)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ZipCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PhotoPath)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Details)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OfferPrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HourPrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TotalPrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NumberOfHours)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RegisteredDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FinishDate)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
 
-                        <tbody>
-                            @foreach (var project in Model)
-                            {
-                                <tr>
-                                    <td>
-                                        @Html.ActionLink(project.Title, "Details/" + project.ID)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => project.RegisteredDate)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => project.Status)
-                                    </td>
-                                    <td>
-                                        @Html.ActionLink(project.Client.Name, "Details/" + project.Client.ID, "Client")
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => project.Address)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => project.Client.Phone)
-                                    </td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
-
-                    <br />
-                    Bls @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) af @Model.PageCount
-
-                    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
-                </div>
-            </div>
+</table>
