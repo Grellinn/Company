@@ -3,51 +3,52 @@
 @{
     ViewBag.Title = "Upplýsingar - Verkefni";
 }
-
-<div class="col-md-4">
-    <div class="panel">
-        <div class="panel-heading">
-            <span class="panel-title">Verkefni</span>
+<div class="row">
+    <div class="col-md-4">
+        <div class="panel">
+            <div class="panel-heading">
+                <span class="panel-title">Breyta stöðu verkefnis</span>
+            </div>
+            <div class="panel-body">
+                @Html.ActionLink("Til baka í lista", "Index", "Project", null, new { @class = "btn btn-primary" })
+                @Html.ActionLink("Verkefni hafið", "ProjectStarted/" + Model.ID, "Project", null, new { @class = "btn btn-warning pull-right" })
+                @Html.ActionLink("Verkefni lokið", "ProjectFinished/" + Model.ID, "Project", null, new { @class = "btn btn-success" })
+            </div>
         </div>
-        <div class="panel-body">
-            @Html.ActionLink("Til baka í lista", "Index", "Project", null, new { @class = "btn btn-primary" })
-            @Html.ActionLink("Verkefni hafið", "ProjectStarted/" + Model.ID, "Project", null, new { @class = "btn btn-warning" })
-            @Html.ActionLink("Verkefni lokið", "ProjectFinished/" + Model.ID, "Project", null, new { @class = "btn btn-success" })
+    </div>
+
+    <div class="col-md-4">
+        <div class="panel">
+            <div class="panel-heading">
+                <span class="panel-title">Bæta við Tekjum / Gjöldum</span>
+            </div>
+            <div class="panel-body">
+                @Html.ActionLink("Bæta við tekjum", "Create", "Income", null, new { @class = "btn btn-success pull-left" })
+                @Html.ActionLink("Bæta við gjöldum", "Create", "Expense", null, new { @class = "btn btn-danger pull-right" })
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="panel">
+            <div class="panel-heading">
+                <span class="panel-title">Breyta / Eyða Verkefni</span>
+            </div>
+            <div class="panel-body">
+                @Html.ActionLink("Breyta verkefni", "Edit/" + Model.ID, "Project", null, new { @class = "btn btn-success pull-left" })
+                @Html.ActionLink("Eyða verkefni", "Delete/" + Model.ID, "Project", null, new { @class = "btn btn-danger pull-right" })
+            </div>
         </div>
     </div>
 </div>
-    
-<div class="col-md-4">
-    <div class="panel">
-        <div class="panel-heading">
-            <span class="panel-title">Verkefni</span>
-        </div>
-        <div class="panel-body">
-            @Html.ActionLink("Bæta við tekjum", "Create", "Income", null, new { @class = "btn btn-success" })
-            @Html.ActionLink("Bæta við gjöldum", "Create", "Expense", null, new { @class = "btn btn-danger" })
-        </div>
-    </div>
-</div>
 
-<div class="col-md-4">
-    <div class="panel">
-        <div class="panel-heading">
-            <span class="panel-title">Verkefni</span>
-        </div>
-        <div class="panel-body">
-            @Html.ActionLink("Breyta verkefni", "Edit/" + Model.ID, "Project", null, new { @class = "btn btn-primary" })
-            @Html.ActionLink("Eyða verkefni", "Delete/" + Model.ID, "Project", null, new { @class = "btn btn-warning" })
-        </div>
-    </div>
-</div>
-
-<div class="col-lg-12">
-    <div class="panel">
-        <div class="panel-heading project">
-            <span class="panel-title"><i class="fa fa-folder-open"></i>Upplýsingar um verkefni</span>
-        </div>
-        <div class="panel-body">
-            <div class="col-md-6">
+<div class="row">
+    <div class="col-lg-6">
+        <div class="panel">
+            <div class="panel-heading project">
+                <span class="panel-title"><i class="fa fa-folder-open"></i>Upplýsingar um verkefni</span>
+            </div>
+            <div class="panel-body">
                 <dl class="dl-horizontal">
                     <dt>
                         @Html.DisplayNameFor(model => model.Title)
@@ -147,8 +148,18 @@
 
                 </dl>
             </div>
-            <div class="col-md-6">
-                <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script><div style="overflow:hidden;height:350px;width:500px;">
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="panel">
+            <div class="panel-heading">
+                <span class="panel-title">Staðsetning á korti</span>
+            </div>
+
+            <div class="panel-body">
+                <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+                <div style="overflow:hidden;height:350px;width:500px;">
                     <div id="gmap_canvas" style="height:500px;width:600px;"></div>
                     <script type="text/javascript">
                     function init_map() {
@@ -170,6 +181,7 @@
         </div>
     </div>
 </div>
+
 
 <div class="col-lg-6">
     <div class="panel">
@@ -214,7 +226,7 @@
     </div>
 </div>
 
-<div class="col-md-6">
+<div class="col-lg-6">
     <div class="panel">
         <div class="panel-heading expense">
             <span class="panel-title"><i class="fa fa-minus"></i> Listi yfir gjöld</span>
