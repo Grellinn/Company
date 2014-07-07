@@ -121,7 +121,7 @@
                 </dt>
 
                 <dd>
-                    @Html.DisplayFor(model => model.NumberOfHours)
+                    @Html.DisplayFor(model => model.NumberOfHours) <span> dagar</span>
                 </dd>
 
             </dl>
@@ -207,7 +207,7 @@
             {
                     <tr>
                         <td>
-                            @Html.ActionLink(expense.Title, "Details/" + expense.ID, "Income")
+                            @Html.ActionLink(expense.Title, "Details/" + expense.ID, "Expense")
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => expense.Description)

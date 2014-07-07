@@ -77,7 +77,7 @@
                                     <tbody>
                                         <tr>
                                             <td>Fjöldi verkefna</td>
-                                            <td>@Model.Projects.Count()</td>
+                                            <td>@Model.Projects.Count() <span> stk</span></td>
                                         </tr>
                                         <tr>
                                             <td>Heildartekjur verkefna</td>
@@ -96,7 +96,7 @@
                                                             tempTotalPrice += Convert.ToInt32(project.TotalIncome);
                                                         }
                                                     }
-                                                    <p>@tempTotalPrice</p>
+                                                    <span>@tempTotalPrice<span> kr.</span></span>
                                                 }
                                             </td>
                                         </tr>
@@ -117,17 +117,31 @@
                                                             tempTotalExpense += Convert.ToInt32(project.TotalExpense);
                                                         }
                                                     }
-                                                    <p>@tempTotalExpense</p>
+                                                    <span>@tempTotalExpense<span> kr.</span></span>
                                                 }
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>Meðallengd verkefna</td>
-                                            <td>3 vikur</td>
+                                            <td>Heildarlengd verkefna</td>
+                                            <td>
+                                                @{
+                                                    int tempTotalDays = 0;
+                                                    foreach (var project in Model.Projects)
+                                                    {
+                                                        tempTotalDays += Convert.ToInt32(project.NumberOfHours);
+                                                    }
+                                                    <span>@tempTotalDays <span> dagar</span></span>
+                                                }
+                                            </td>
                                         </tr>
                                         <tr>
-                                            <td>Eitthvað annað</td>
-                                            <td>225.500 kr.</td>
+                                            <td>Hagnaður / Tap</td>
+                                            <td>
+                                                @{
+                                                    int tempTotal = tempTotalPrice - tempTotalExpense;
+                                                    <p>@tempTotal<span> kr.</span></p>
+                                                }
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -195,7 +209,7 @@
                     {
                         <tr>
                             <td>
-                                @Html.ActionLink(income.Title, "Details/" + income.ID, "Project")
+                                @Html.ActionLink(income.Title, "Details/" + income.ID, "Income")
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => income.Registered)
@@ -231,7 +245,7 @@
                     {
                         <tr>
                             <td>
-                                @Html.ActionLink(expense.Title, "Details/" + expense.ID, "Project")
+                                @Html.ActionLink(expense.Title, "Details/" + expense.ID, "Expense")
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => expense.Registered)

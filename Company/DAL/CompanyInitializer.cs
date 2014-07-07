@@ -25,7 +25,7 @@ namespace Company.DAL
 
 			var projects = new List<Project>
 			{
-				new Project { Title="Prentun á 100 stk umslög", ClientID=1, Details ="Lýsing...", StartedDate=DateTime.Parse("2014/07/06"), OfferPrice=1500000, TotalIncome=1500000, Address="Hátún 6B", ZipCode="105 RVK", Status="Ekki hafið", RegisteredDate=DateTime.Now },
+				new Project { Title="Prentun á 100 stk umslög", ClientID=1, Details ="Lýsing...", StartedDate=DateTime.Parse("2014/07/06"), OfferPrice=0, TotalIncome=0, Address="Hátún 6B", ZipCode="105 RVK", Status="Verkefni hafið", RegisteredDate=DateTime.Now },
 				new Project { Title="Prentun á 100 stk umslög", ClientID=1, Details ="Lýsing...", StartedDate=DateTime.Parse("2014/07/06"), OfferPrice=1500000, TotalIncome=1500000, Address="Hátún 6B", ZipCode="105 RVK", Status="Ekki hafið", RegisteredDate=DateTime.Now },
 				new Project { Title="Prentun á 100 stk umslög", ClientID=2, Details ="Lýsing...", StartedDate=DateTime.Parse("2014/07/06"), OfferPrice=1500000, TotalIncome=1500000, Address="Hátún 6B", ZipCode="105 RVK", Status="Ekki hafið", RegisteredDate=DateTime.Now },
 				new Project { Title="Prentun á 100 stk umslög", ClientID=3, Details ="Lýsing...", StartedDate=DateTime.Parse("2014/07/06"), OfferPrice=1500000, TotalIncome=1500000, Address="Hátún 6B", ZipCode="105 RVK", Status="Ekki hafið", RegisteredDate=DateTime.Now }
