@@ -125,7 +125,7 @@ namespace Company.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="ID,Title,Address,ZipCode,PhotoPath,ClientID,Details,OfferPrice,HourPrice,TotalPrice,NumberOfHours,Status,RegisteredDate,FinishDate")] Project project)
+        public ActionResult Create([Bind(Include="Title,Address,ZipCode,ClientID,Details")] Project project)
         {
             if (ModelState.IsValid)
             {
@@ -151,7 +151,7 @@ namespace Company.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="ID,Title,Address,ZipCode,PhotoPath,ClientID,Details,OfferPrice,HourPrice,TotalPrice,NumberOfHours,Status,RegisteredDate,FinishDate")] Project project)
+		public ActionResult Edit([Bind(Include = "Title,Address,ZipCode,ClientID,Details")] Project project)
         {
             if (ModelState.IsValid)
             {
@@ -180,6 +180,16 @@ namespace Company.Controllers
 			projectRepo.Save();
 			return RedirectToAction("Index");
         }
+
+		public ActionResult ProjectStarted(int id)
+		{
+			Project project = projectRepo.GetProjectByID(id);
+			project.Status = "Verkefni hafið";
+			projectRepo.UpdateProject(project);
+			projectRepo.Save();
+
+			return RedirectToAction("Details/" + project.ID);
+		}
 
         protected override void Dispose(bool disposing)
         {

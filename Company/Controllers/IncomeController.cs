@@ -15,7 +15,22 @@ namespace Company.Controllers
     {
         private CompanyContext db = new CompanyContext();
 
-        // GET: /Income/
+		//int tempTotalIncome = 0;
+
+		//	Project project = projectRepo.GetProjectByID(id);
+		//	project.TotalIncome = 0;
+		//	project.TotalExpense = 0;
+
+		//	foreach (var income in project.Incomes)
+		//	{
+		//		project.TotalIncome += income.Amount;
+		//	}
+		//	if (project.TotalIncome != 0
+		//	{
+		//		tempTotalIncome += Convert.ToInt32(project.TotalIncome);
+		//	}
+		
+		// GET: /Income/
         public ActionResult Index()
         {
             var incomes = db.Incomes.Include(i => i.Project);

@@ -121,7 +121,7 @@ namespace Company.Controllers
 		// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public ActionResult Create([Bind(Include = "ID,Name,Address,Phone,Email")] Client client)
+		public ActionResult Create([Bind(Include = "Name,Phone")] Client client)
 		{
 			if (ModelState.IsValid)
 			{

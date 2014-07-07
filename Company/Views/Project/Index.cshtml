@@ -47,7 +47,10 @@
                         @Html.ActionLink("Póst nr.", "Index", new { sortOrder = ViewBag.ZipCodeSortParm, currentFilter = ViewBag.CurrentFilter })
                     </th>
                     <th>
-                        @Html.ActionLink("Heildar verð", "Index", new { sortOrder = ViewBag.TotalPriceSortParm, currentFilter = ViewBag.CurrentFilter })
+                        @Html.ActionLink("Heildartekjur", "Index", new { sortOrder = ViewBag.TotalPriceSortParm, currentFilter = ViewBag.CurrentFilter })
+                    </th>
+                    <th>
+                        @Html.ActionLink("Heildarkostnaður", "Index", new { sortOrder = ViewBag.TotalPriceSortParm, currentFilter = ViewBag.CurrentFilter })
                     </th>
                     <th>
                         @Html.ActionLink("Staða", "Index", new { sortOrder = ViewBag.StatusSortParm, currentFilter = ViewBag.CurrentFilter })
@@ -72,7 +75,10 @@
                             @Html.DisplayFor(modelItem => item.ZipCode)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.TotalPrice)
+                            @Html.DisplayFor(modelItem => item.TotalIncome)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TotalExpense)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Status)

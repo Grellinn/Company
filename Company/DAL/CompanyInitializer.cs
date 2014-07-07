@@ -12,12 +12,12 @@ namespace Company.DAL
 		{
 			var clients = new List<Client>
 			{
-				new Client { Name="Grétar Már Margrétarson", Email="grellinn@gmail.com", Address="Hátún 6B, 105 RVK", Phone=7701614, Registered=DateTime.Now, Company="Iðnlausn.is"},
-				new Client { Name="Grétar Karlsson", Email="thakmalun@thakmalun.is", Address="Fannborg 2, 200 KÓP", Phone=8992008, Registered=DateTime.Now, Company="Þakmálun.is"},
-				new Client { Name="Kristján Sigurðsson", Email="kristjan@kjs.is", Address="Rofabær 3, XXX MOS", Phone=8966078, Registered=DateTime.Now, Company="KJS Verktakar ehf."},
-				new Client { Name="Davíð Elvar Másson", Email="david@karfa.is", Address="Hjallavegur 1, 104 RVK", Phone=8446794, Registered=DateTime.Now, Company="Karfa.is"},
-				new Client { Name="Davíð Helgi Andrésson", Email="davidandresson@gmail.com", Address="Vesturbrún 33, 104 RVK", Phone=8235200, Registered=DateTime.Now, Company="Samskip ehf."},
-				new Client { Name="Jens Sigurðsson", Email="jenni@naggur.is", Address="Hörðukór 1, XXX KÓP", Phone=6617444, Registered=DateTime.Now, Company="Naggur ehf."}
+				new Client { Name="Grétar Már Margrétarson", Email="grellinn@gmail.com", Address="Hátún 6B", ZipCode="105 RVK", Phone=7701614, Registered=DateTime.Now, Company="Iðnlausn.is"},
+				new Client { Name="Grétar Karlsson", Email="thakmalun@thakmalun.is", Address="Fannborg 2", ZipCode="200 KÓP", Phone=8992008, Registered=DateTime.Now, Company="Þakmálun.is"},
+				new Client { Name="Kristján Sigurðsson", Email="kristjan@kjs.is", Address="Rofabær 3", ZipCode="XXX MOS", Phone=8966078, Registered=DateTime.Now, Company="KJS Verktakar ehf."},
+				new Client { Name="Davíð Elvar Másson", Email="david@karfa.is", Address="Hjallavegur 1", ZipCode="104 RVK", Phone=8446794, Registered=DateTime.Now, Company="Karfa.is"},
+				new Client { Name="Davíð Helgi Andrésson", Email="davidandresson@gmail.com", Address="Vesturbrún 33", ZipCode="104 RVK", Phone=8235200, Registered=DateTime.Now, Company="Samskip ehf."},
+				new Client { Name="Jens Sigurðsson", Email="jenni@naggur.is", Address="Hörðukór 1", ZipCode="XXX KÓP", Phone=6617444, Registered=DateTime.Now, Company="Naggur ehf."}
 			};
 
 			clients.ForEach(c => dbContext.Clients.Add(c));

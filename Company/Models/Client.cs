@@ -20,6 +20,11 @@ namespace Company.Models
 		[StringLength(60, MinimumLength = 3)]
 		public string Address { get; set; }
 
+		[Display(Name = "Póstnúmer")]
+		[Required(ErrorMessage = "Vinsamlegast sláðu inn póstnúmer")] // Verður að taka gildi, gefur annars villumeldingu
+		[StringLength(60, MinimumLength = 3)]
+		public string ZipCode { get; set; }
+
 		[Display(Name = "Sími")]
 		[Required(ErrorMessage = "Vinsamlegast sláðu inn símanúmer")] // Verður að taka gildi, gefur annars villumeldingu
 		public int Phone { get; set; }
@@ -31,7 +36,7 @@ namespace Company.Models
 		public string Email { get; set; }
 
 		[Display(Name = "Skráður")]
-		public DateTime Registered { get; set; }
+		public DateTime? Registered { get; set; }
 
 		[Display(Name = "Fyrirtæki")]
 		[StringLength(20, MinimumLength = 2)]
