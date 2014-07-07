@@ -45,6 +45,34 @@ namespace Company.Repositories
 			context.Entry(project).State = EntityState.Modified;
 		}
 
+		public void UpdateProjectTotalIncome(int id)
+		{
+			Project project = GetProjectByID(id);
+			project.Incomes = context.Incomes.Where(i => i.ProjectID == id).ToList();
+			project.TotalIncome = 0;
+
+			foreach (var income in project.Incomes)
+			{
+				project.TotalIncome += income.Amount;
+			}
+
+			context.Entry(project).State = EntityState.Modified;
+		}
+
+		public void UpdateProjectTotalExpense(int id)
+		{
+			Project project = GetProjectByID(id);
+			project.Expenses = context.Expenses.Where(e => e.ProjectID == id).ToList();
+			project.TotalExpense = 0;
+
+			foreach (var expense in project.Expenses)
+			{
+				project.TotalExpense += expense.Amount;
+			}
+
+			context.Entry(project).State = EntityState.Modified;
+		}
+
 		public void Save()
 		{
 			context.SaveChanges();

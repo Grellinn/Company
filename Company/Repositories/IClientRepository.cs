@@ -9,7 +9,7 @@ namespace Company.Repositories
 	public interface IClientRepository : IDisposable
 	{
 		IEnumerable<Client> GetClients();
-		Client GetClientByID(int clientId);
+		Client GetClientByID(int clientID);
 		void InsertClient(Client client);
 		void DeleteClient(int clientID);
 		void UpdateClient(Client client);

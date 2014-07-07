@@ -24,6 +24,7 @@ namespace Company.Models
 		public DateTime Registered { get; set; }
 
 		[Display(Name = "Upphæð")]
+		[Required(ErrorMessage = "Sláðu inn upphæð")]
 		public int Amount { get; set; }
 
 		[Display(Name = "Verkefni")]

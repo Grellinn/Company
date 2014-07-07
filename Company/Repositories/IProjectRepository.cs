@@ -14,6 +14,8 @@ namespace Company.Repositories
 		void InsertProject(Project project);
 		void DeleteProject(int projectID);
 		void UpdateProject(Project project);
+		void UpdateProjectTotalIncome(int id);
+		void UpdateProjectTotalExpense(int id);
 		void Save();
 	}
 }

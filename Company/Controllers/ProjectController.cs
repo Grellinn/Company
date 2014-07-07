@@ -129,9 +129,15 @@ namespace Company.Controllers
         {
             if (ModelState.IsValid)
             {
+				if (project.Address == null)
+				{
+					project.Address = clientRepo.GetClientByID(project.ClientID).Address;
+					project.ZipCode = clientRepo.GetClientByID(project.ClientID).ZipCode;
+				}
 				project.Status = "Ekki hafið";
+				project.TotalExpense = 0;
+				project.TotalIncome = 0;
 				project.RegisteredDate = DateTime.Now;
-				TryUpdateModel(project);
 				projectRepo.InsertProject(project);
 				projectRepo.Save();
                 return RedirectToAction("Index");
@@ -221,6 +227,7 @@ namespace Company.Controllers
             if (disposing)
             {
                 projectRepo.Dispose();
+				clientRepo.Dispose();
             }
             base.Dispose(disposing);
         }

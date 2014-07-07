@@ -8,39 +8,39 @@ using System.Web;
 using System.Web.Mvc;
 using Company.Models;
 using Company.DAL;
+using Company.Repositories;
 
 namespace Company.Controllers
 {
     public class ExpenseController : Controller
     {
-        private CompanyContext db = new CompanyContext();
+		private IExpenseRepository expenseRepo;
+		private IProjectRepository projectRepo;
+
+		public ExpenseController()
+		{
+			this.expenseRepo = new ExpenseRepository(new CompanyContext());
+			this.projectRepo = new ProjectRepository(new CompanyContext());
+		}
 
         // GET: /Expense/
         public ActionResult Index()
         {
-            var expenses = db.Expenses.Include(e => e.Project);
-            return View(expenses.ToList());
+			var expenses = expenseRepo.GetExpenses();
+            return View(expenses);
         }
 
         // GET: /Expense/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Expense expense = db.Expenses.Find(id);
-            if (expense == null)
-            {
-                return HttpNotFound();
-            }
+			Expense expense = expenseRepo.GetExpenseByID(id);
             return View(expense);
         }
 
         // GET: /Expense/Create
         public ActionResult Create()
         {
-            ViewBag.ProjectID = new SelectList(db.Projects, "ID", "Title");
+            ViewBag.ProjectID = new SelectList(projectRepo.GetProjects(), "ID", "Title");
             return View();
         }
 
@@ -49,32 +49,31 @@ namespace Company.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="ID,Title,Description,Registered,ProjectID,Amount")] Expense expense)
+        public ActionResult Create([Bind(Include="Title,Description,ProjectID,Amount")] Expense expense)
         {
             if (ModelState.IsValid)
             {
-                db.Expenses.Add(expense);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+				expense.Registered = DateTime.Now;
+				expenseRepo.InsertExpense(expense);
+				expenseRepo.Save();
+
+				#region uppfæra heildarkostnað á verkefni
+				projectRepo.UpdateProjectTotalExpense(expense.ProjectID);
+				projectRepo.Save();
+				#endregion
+
+				return RedirectToAction("Index");
             }
 
-            ViewBag.ProjectID = new SelectList(db.Projects, "ID", "Title", expense.ProjectID);
+            ViewBag.ProjectID = new SelectList(projectRepo.GetProjects(), "ID", "Title", expense.ProjectID);
             return View(expense);
         }
 
         // GET: /Expense/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Expense expense = db.Expenses.Find(id);
-            if (expense == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.ProjectID = new SelectList(db.Projects, "ID", "Title", expense.ProjectID);
+			Expense expense = expenseRepo.GetExpenseByID(id);
+            ViewBag.ProjectID = new SelectList(projectRepo.GetProjects(), "ID", "Title", expense.ProjectID);
             return View(expense);
         }
 
@@ -83,30 +82,22 @@ namespace Company.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="ID,Title,Description,Registered,ProjectID,Amount")] Expense expense)
+        public ActionResult Edit([Bind(Include="Title,Description,ProjectID,Amount")] Expense expense)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(expense).State = EntityState.Modified;
-                db.SaveChanges();
+				expenseRepo.UpdateExpense(expense);
+				expenseRepo.Save();
                 return RedirectToAction("Index");
             }
-            ViewBag.ProjectID = new SelectList(db.Projects, "ID", "Title", expense.ProjectID);
+            ViewBag.ProjectID = new SelectList(projectRepo.GetProjects(), "ID", "Title", expense.ProjectID);
             return View(expense);
         }
 
         // GET: /Expense/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Expense expense = db.Expenses.Find(id);
-            if (expense == null)
-            {
-                return HttpNotFound();
-            }
+			Expense expense = expenseRepo.GetExpenseByID(id);
             return View(expense);
         }
 
@@ -115,9 +106,9 @@ namespace Company.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Expense expense = db.Expenses.Find(id);
-            db.Expenses.Remove(expense);
-            db.SaveChanges();
+			Expense expense = expenseRepo.GetExpenseByID(id);
+			expenseRepo.DeleteExpense(id);
+			expenseRepo.Save();
             return RedirectToAction("Index");
         }
 
@@ -125,7 +116,8 @@ namespace Company.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                expenseRepo.Dispose();
+				projectRepo.Dispose();
             }
             base.Dispose(disposing);
         }
