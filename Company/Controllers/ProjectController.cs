@@ -129,6 +129,9 @@ namespace Company.Controllers
         {
             if (ModelState.IsValid)
             {
+				project.Status = "Ekki hafið";
+				project.RegisteredDate = DateTime.Now;
+				TryUpdateModel(project);
 				projectRepo.InsertProject(project);
 				projectRepo.Save();
                 return RedirectToAction("Index");
@@ -181,10 +184,32 @@ namespace Company.Controllers
 			return RedirectToAction("Index");
         }
 
+		// GET: /Project/ProjectStarted/5
 		public ActionResult ProjectStarted(int id)
 		{
 			Project project = projectRepo.GetProjectByID(id);
 			project.Status = "Verkefni hafið";
+			project.StartedDate = DateTime.Now;
+			projectRepo.UpdateProject(project);
+			projectRepo.Save();
+
+			return RedirectToAction("Details/" + project.ID);
+		}
+
+		// GET: /Project/ProjectFinished/5
+		public ActionResult ProjectFinished(int id)
+		{
+			Project project = projectRepo.GetProjectByID(id);
+			project.Status = "Verkefni lokið";
+			project.FinishDate = DateTime.Now;
+			
+			if (project.RegisteredDate != null || project.StartedDate != null)
+			{
+				DateTime startDate = project.StartedDate.Value;
+				DateTime finishDate = project.FinishDate.Value;
+				project.NumberOfHours = finishDate.Subtract(startDate).Days;
+			}
+			
 			projectRepo.UpdateProject(project);
 			projectRepo.Save();
 

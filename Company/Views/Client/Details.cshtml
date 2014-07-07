@@ -5,11 +5,11 @@
 }
 
 <div class="panel">
-    <div class="panel-heading">
+    <div class="panel-heading project">
         <span class="panel-title">@Model.Name</span>
     </div>
     <div class="panel-body">
-        @Html.ActionLink("Til baka í lista", "Index", "Client", new { @class = "btn btn-default" })
+        @Html.ActionLink("Til baka í lista", "Index", "Client", new { @class = "btn btn-primary" })
         <div class="pull-right">
             <a href="mailto:@Model.Email" data-original-title="Broadcast Message" data-toggle="tooltip" type="button" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-envelope"></i></a>
             @Html.ActionLink("Breyta viðskiptavin", "Edit/" + @Model.ID, "Client", new { @class = "btn btn-success" })
@@ -20,7 +20,7 @@
 
 
 <div class="panel">
-    <div class="panel-heading client">
+    <div class="panel-heading project">
         <span class="panel-title">Yfirlit yfir viðskiptavin</span>
     </div>
     <div class="panel-body">

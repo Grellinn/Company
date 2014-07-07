@@ -10,13 +10,14 @@
         <span class="panel-title">Verkefni</span>
     </div>
     <div class="panel-body">
-        @Html.ActionLink("Til baka í lista", "Index", "Project", new { @class = "btn btn-primary" })
-        @Html.ActionLink("Verkefni hafið", "ProjectStarted/" + Model.ID, "Project", new { @class = "btn btn-primary" })
+        @Html.ActionLink("Til baka í lista", "Index", "Project", null, new { @class = "btn btn-primary" })
+        @Html.ActionLink("Verkefni hafið", "ProjectStarted/" + Model.ID, "Project", null, new { @class = "btn btn-warning" })
+        @Html.ActionLink("Verkefni lokið", "ProjectFinished/" + Model.ID, "Project", null, new { @class = "btn btn-success" })
         <div class="pull-right">
-            @Html.ActionLink("Breyta verkefni", "Edit/" + Model.ID, "Project", new { @class = "btn btn-primary" })
-            @Html.ActionLink("Bæta við tekjum", "Create", "Income", new { @class = "btn btn-success" })
-            @Html.ActionLink("Bæta við gjöldum", "Create", "Expense", new { @class = "btn btn-danger" })
-            @Html.ActionLink("Eyða verkefni", "Delete/" + Model.ID, "Project", new { @class = "btn btn-danger" })
+            @Html.ActionLink("Breyta verkefni", "Edit/" + Model.ID, "Project", null, new { @class = "btn btn-primary" })
+            @Html.ActionLink("Bæta við tekjum", "Create", "Income", null, new { @class = "btn btn-success" })
+            @Html.ActionLink("Bæta við gjöldum", "Create", "Expense", null, new { @class = "btn btn-danger" })
+            @Html.ActionLink("Eyða verkefni", "Delete/" + Model.ID, "Project", null, new { @class = "btn btn-warning" })
         </div>
     </div>
 </div>

@@ -56,6 +56,9 @@ namespace Company.Models
 		[Display(Name = "Skráð")]
 		public DateTime? RegisteredDate { get; set; }
 
+		[Display(Name = "Hafið þann")]
+		public DateTime? StartedDate { get; set; }
+
 		[Display(Name = "Lokið þann")]
 		public DateTime? FinishDate { get; set; }
 		#endregion
