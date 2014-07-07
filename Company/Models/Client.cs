@@ -16,12 +16,10 @@ namespace Company.Models
 		public string Name { get; set; }
 
 		[Display(Name = "Heimilisfang")]
-		[Required(ErrorMessage = "Vinsamlegast sláðu inn heimilisfang")] // Verður að taka gildi, gefur annars villumeldingu
 		[StringLength(60, MinimumLength = 3)]
 		public string Address { get; set; }
 
 		[Display(Name = "Póstnúmer")]
-		[Required(ErrorMessage = "Vinsamlegast sláðu inn póstnúmer")] // Verður að taka gildi, gefur annars villumeldingu
 		[StringLength(60, MinimumLength = 3)]
 		public string ZipCode { get; set; }
 
@@ -31,7 +29,6 @@ namespace Company.Models
 
 		[Display(Name = "Tölvupóstur")]
 		[EmailAddress]
-		[Required(ErrorMessage = "Vinsamlegast sláðu inn tölvupóst")] // Verður að taka gildi, gefur annars villumeldingu
 		[StringLength(60, MinimumLength = 3)]
 		public string Email { get; set; }
 
