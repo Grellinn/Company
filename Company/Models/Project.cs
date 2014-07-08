@@ -41,13 +41,13 @@ namespace Company.Models
 		#endregion
 
 		#region Properties that the system uses
-		[Display(Name = "Heildartekjur")]
+		[Display(Name = "Samanlagðar tekjur verkefna")]
 		public int? TotalIncome { get; set; }
 
-		[Display(Name = "Heildarkostnaður")]
+		[Display(Name = "Samanlagður kostnaður verkefna")]
 		public int? TotalExpense { get; set; }
 
-		[Display(Name = "Heildarfjöldi tíma")]
+		[Display(Name = "Samanalagður fjöldi daga")]
 		public int? NumberOfHours { get; set; }
 		
 		[Display(Name = "Staða")]

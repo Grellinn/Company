@@ -22,6 +22,11 @@ namespace Company.Repositories
 			return context.Clients.ToList();
 		}
 
+		public IEnumerable<Client> Get5NewestClients()
+		{
+			return context.Clients.OrderByDescending(c => c.Registered).Take(5).ToList();
+		}
+
 		public Client GetClientByID(int id)
 		{
 			return context.Clients.Find(id);

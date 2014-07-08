@@ -25,6 +25,9 @@
                     @Html.DisplayNameFor(model => model.Registered)
                 </th>
                 <th>
+                    Viðskiptavinur
+                </th>
+                <th>
                     Verkefni
                 </th>
                 <th>
@@ -43,6 +46,9 @@
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Registered)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Client.Name)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Project.Title)

@@ -41,5 +41,8 @@ namespace Company.Models
 
 		[Display(Name = "Verkefni viðskiptavinar")]
 		public virtual ICollection<Project> Projects { get; set; }
+
+		[Display(Name = "Tekjur frá viðskiptavini")]
+		public virtual ICollection<Income> Incomes { get; set; }
 	}
 }

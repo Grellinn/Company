@@ -49,104 +49,46 @@
                 <span class="panel-title"><i class="fa fa-folder-open"></i>Upplýsingar um verkefni</span>
             </div>
             <div class="panel-body">
-                <dl class="dl-horizontal">
-                    <dt>
-                        @Html.DisplayNameFor(model => model.Title)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.Title)
-                    </dd>
-
-                    <dt>
-                        Viðskiptavinur
-                    </dt>
-
-                    <dd>
-                        @Html.ActionLink(Model.Client.Name, "Details/" + Model.ClientID, "Client")
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.Address)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.Address)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.ZipCode)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.ZipCode)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.Details)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.Details)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.Status)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.Status)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.RegisteredDate)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.RegisteredDate)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.StartedDate)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.StartedDate)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.FinishDate)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.FinishDate)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.TotalIncome)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.TotalIncome)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.TotalExpense)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.TotalExpense)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.NumberOfHours)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.NumberOfHours) <span> dagar</span>
-                    </dd>
-
-                </dl>
+                <table class="table table-user-information">
+                    <tbody>
+                        <tr>
+                            <td>@Html.DisplayNameFor(model => model.Title)</td>
+                            <td>@Html.DisplayFor(model => model.Title)</td>
+                        </tr>
+                        <tr>
+                            <td>@Html.DisplayNameFor(model => model.Client)</td>
+                            <td>@Html.ActionLink(Model.Client.Name, "Details/" + Model.ClientID, "Client")</td>
+                        </tr>
+                        <tr>
+                            <td>@Html.DisplayNameFor(model => model.Address)</td>
+                            <td>@Html.DisplayFor(model => model.Address)</td>
+                        </tr>
+                        <tr>
+                            <td>@Html.DisplayNameFor(model => model.Client.ZipCode)</td>
+                            <td>@Html.DisplayFor(model => model.Client.ZipCode)</td>
+                        </tr>
+                        <tr>
+                            <td>@Html.DisplayNameFor(model => model.Details)</td>
+                            <td>@Html.DisplayFor(model => model.Details)</td>
+                        </tr>
+                        <tr>
+                            <td>@Html.DisplayNameFor(model => model.Status)</td>
+                            <td>@Html.DisplayFor(model => model.Status)</td>
+                        </tr>
+                        <tr>
+                            <td>@Html.DisplayNameFor(model => model.RegisteredDate)</td>
+                            <td>@Html.DisplayFor(model => model.RegisteredDate)</td>
+                        </tr>
+                        <tr>
+                            <td>@Html.DisplayNameFor(model => model.StartedDate)</td>
+                            <td>@Html.DisplayFor(model => model.StartedDate)</td>
+                        </tr>
+                        <tr>
+                            <td>@Html.DisplayNameFor(model => model.FinishDate)</td>
+                            <td>@Html.DisplayFor(model => model.FinishDate)</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
@@ -182,6 +124,48 @@
     </div>
 </div>
 
+<div class="row">
+    <div class="col-md-3">
+        <div class="panel">
+            <div class="panel-heading">
+                <span class="panel-title">@Html.DisplayNameFor(model => model.TotalIncome)</span>
+            </div>
+            <div class="panel-body">
+                <h2 align="center">@Html.DisplayFor(model => model.TotalIncome)<small> kr.</small></h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="panel">
+            <div class="panel-heading">
+                <span class="panel-title">@Html.DisplayNameFor(model => model.NumberOfHours)</span>
+            </div>
+            <div class="panel-body">
+                <h2 align="center">@Html.DisplayFor(model => model.NumberOfHours)<small> dagar</small></h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="panel">
+            <div class="panel-heading">
+                <span class="panel-title">@Html.DisplayNameFor(model => model.TotalExpense)</span>
+            </div>
+            <div class="panel-body">
+                <h2 align="center">@Html.DisplayFor(model => model.TotalExpense)<small> kr.</small></h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="panel">
+            <div class="panel-heading">
+                <span class="panel-title">Hagnaður / Tap</span>
+            </div>
+            <div class="panel-body">
+                <h2 align="center">@{ int tempProfitLoss = Convert.ToInt32(Model.TotalIncome - Model.TotalExpense); <span>@tempProfitLoss</span> }<small> kr.</small></h2>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div class="col-lg-6">
     <div class="panel">
@@ -200,7 +184,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var income in Model.Incomes)
+                    @foreach (var income in Model.Incomes.OrderByDescending(i => i.Registered).Take(5))
                     {
                         <tr>
                             <td>
@@ -242,7 +226,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var expense in Model.Expenses)
+                    @foreach (var expense in Model.Expenses.OrderByDescending(e => e.Registered).Take(5))
                     {
                         <tr>
                             <td>

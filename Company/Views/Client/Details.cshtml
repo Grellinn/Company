@@ -168,22 +168,25 @@
                     <th>Heimilisfang</th>
                 </tr>
             </thead>
-            @foreach (var project in Model.Projects)
-            {
-                <tr>
-                    <td>
-                        @Html.ActionLink(project.Title, "Details/" + project.ID, "Project")
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => project.Status)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => project.RegisteredDate)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => project.Address)
-                    </td>
-                </tr>
+            @{
+                //var fiveNewestProjects = Model.Projects.OrderByDescending(p => p.RegisteredDate).Take(5);
+                foreach (var project in Model.Projects.OrderByDescending(p => p.RegisteredDate).Take(5))
+                {
+                    <tr>
+                        <td>
+                            @Html.ActionLink(project.Title, "Details/" + project.ID, "Project")
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => project.Status)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => project.RegisteredDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => project.Address)
+                        </td>
+                    </tr>
+                }
             }
         </table>
     </div>
@@ -203,21 +206,23 @@
                         <th>Upphæð</th>
                     </tr>
                 </thead>
-                @foreach (var project in Model.Projects)
-                {
-                    foreach (var income in project.Incomes)
+                @{
+                    foreach (var project in Model.Projects)
                     {
-                        <tr>
-                            <td>
-                                @Html.ActionLink(income.Title, "Details/" + income.ID, "Income")
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => income.Registered)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => income.Amount)
-                            </td>
-                        </tr>
+                        foreach (var income in project.Incomes.OrderByDescending(i => i.Registered).Take(5))
+                        {
+                            <tr>
+                                <td>
+                                    @Html.ActionLink(income.Title, "Details/" + income.ID, "Income")
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => income.Registered)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => income.Amount)
+                                </td>
+                            </tr>
+                        }
                     }
                 }
             </table>
@@ -241,7 +246,7 @@
                 </thead>
                 @foreach (var project in Model.Projects)
                 {
-                    foreach (var expense in project.Expenses)
+                    foreach (var expense in project.Expenses.OrderByDescending(e => e.Registered).Take(5))
                     {
                         <tr>
                             <td>
