@@ -39,7 +39,7 @@
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Title)
+                        @Html.ActionLink(item.Title, "Details/" + item.ID, "Income")
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Description)
@@ -48,10 +48,10 @@
                         @Html.DisplayFor(modelItem => item.Registered)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Client.Name)
+                        @Html.ActionLink(item.Project.Client.Name, "Details/" + item.Project.ClientID, "Client")
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Project.Title)
+                        @Html.ActionLink(item.Project.Title, "Details/" + item.ProjectID, "Project")
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Amount)

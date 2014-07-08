@@ -1,58 +1,70 @@
 ﻿@model Company.Models.Expense
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Yfirlit";
 }
 
-<h2>Details</h2>
-
-<div>
-    <h4>Expense</h4>
-	<hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Project.Title)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Project.Title)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Registered)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Registered)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Amount)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Amount)
-        </dd>
-
-    </dl>
+<div class="panel">
+    <div class="panel-heading project">
+        <span class="panel-title">@Model.Title</span>
+    </div>
+    <div class="panel-body">
+        @Html.ActionLink("Til baka í lista", "Index", "Expense", new { @class = "btn btn-primary" })
+        <div class="pull-right">
+            @Html.ActionLink("Breyta gjöldum", "Edit/" + @Model.ID, "Expense", new { @class = "btn btn-success" })
+            @Html.ActionLink("Eyða gjöldum", "Delete/" + @Model.ID, "Expense", new { @class = "btn btn-danger" })
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+<div class="panel">
+    <div class="panel-heading">
+        <span class="panel-title">@Model.Title</span>
+    </div>
+    <div class="panel-body">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Title)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Title)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Description)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Description)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Registered)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Registered)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Project)
+            </dt>
+
+            <dd>
+                @Html.ActionLink(Model.Project.Title, "Details/" + Model.ProjectID, "Project")
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Amount)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Amount)
+            </dd>
+
+        </dl>
+    </div>
+</div>
+
+    

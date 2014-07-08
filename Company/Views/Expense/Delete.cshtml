@@ -4,61 +4,73 @@
     ViewBag.Title = "Delete";
 }
 
-<h2>Delete</h2>
+<div class="panel">
+    <div class="panel-heading">
+        <span class="panel-title">@Model.Title</span>
+    </div>
+    <div class="panel-body">
+        @Html.ActionLink("Til baka í gjöld", "Details/" + Model.ID, null, new { @class = "btn btn-primary" })
+    </div>
+</div>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>Expense</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Project.Title)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Project.Title)
-        </dd>
+<div class="panel">
+    <div class="panel-heading">
+        <span class="panel-title">Ertu viss um að þú viljir eyða þessum gjöldum?</span>
+    </div>
+    <div class="panel-body">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Project.Title)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Project.Title)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Title)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Title)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Description)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Registered)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Description)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Registered)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Registered)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Amount)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Registered)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Amount)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Amount)
+            </dt>
 
-    </dl>
+            <dd>
+                @Html.DisplayFor(model => model.Amount)
+            </dd>
 
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
+            <dd>
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
-        </div>
-    }
+                    <div class="form-actions no-color">
+                        <input type="submit" value="Eyða" class="btn btn-danger" />
+                    </div>
+                }
+            </dd>
+
+        </dl>
+    </div>
 </div>
