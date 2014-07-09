@@ -445,6 +445,7 @@ a.stat-cell:hover {
     background: #edece7;
     border-color: #E9E9E9;
     border-bottom: 1px solid #e4e4e4;
+    border-top: 1px solid #e4e4e4;
     margin: -18px -18px 18px -18px;
     padding: 20px 18px;
 }
