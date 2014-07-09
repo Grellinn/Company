@@ -509,3 +509,32 @@ hr {
 .no-margin {
     margin: 0!important;
 }
+
+.btn.btn-labeled .btn-label {
+    display: block;
+    float: left;
+    margin: -8px 12px -8px -13px;
+    padding: 10px 10px;
+    position: relative;
+    background: rgba(0,0,0,.06);
+    line-height: 15px;
+    border-bottom-left-radius: 2px;
+    border-top-left-radius: 2px;
+}
+
+.btn.btn-labeled .btn-label.icon {
+    font-size: 14px;
+}
+
+#content-wrapper {
+    left: 0;
+    padding-top: 40px;
+    width: 100%;
+    position: relative;
+}
+
+@media (min-width: 768px) {
+    .col-sm-auto {
+        width: auto;
+    }
+}
