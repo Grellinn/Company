@@ -6,116 +6,100 @@
     ViewBag.Title = "Viðskiptavinir";
 }
 
-<div id="content-wrapper">
-    <div class="page-header">
-        <div class="row">
-            <!-- Page header, center on small screens -->
-            <h1 class="col-xs-12 col-sm-4 text-left-sm"><i class="fa fa-users page-header-icon"></i>&nbsp;&nbsp;Viðskiptavinir</h1>
 
-            <div class="col-xs-12 col-sm-8">
-                <div class="row">
-                    <hr class="visible-xs no-grid-gutter-h">
-                    <!-- "Create project" button, width=auto on desktops -->
-                    <div class="pull-right col-xs-12 col-sm-auto">
-                        <a href="/Client/Create" class="btn btn-primary btn-labeled" style="width: 100%;"><span class="btn-label icon fa fa-plus"></span>Skrá nýjan viðskiptavin</a>
+<div class="page-header">
+    <div class="row">
+        <!-- Page header, center on small screens -->
+        <h1 class="col-xs-12 col-sm-4 text-left-sm"><i class="fa fa-users page-header-icon"></i>&nbsp;&nbsp;Viðskiptavinir</h1>
+
+        <div class="col-xs-12 col-sm-8">
+            <div class="row">
+                <hr class="visible-xs no-grid-gutter-h">
+                <!-- "Create project" button, width=auto on desktops -->
+                <div class="pull-right col-xs-12 col-sm-auto">
+                    <a href="/Client/Create" class="btn btn-primary btn-labeled" style="width: 100%;"><span class="btn-label icon fa fa-plus"></span>Skrá nýjan viðskiptavin</a>
+                </div>
+
+                <!-- Margin -->
+                <div class="visible-xs clearfix form-group-margin"></div>
+
+                <!-- Search field -->
+                @using (Html.BeginForm("Index", "Client", FormMethod.Get, new { @class = "pull-right col-xs-12 col-sm-6" }))
+                { 
+                    <div class="input-group no-margin">
+                        <span class="input-group-addon" style="border:none;background: #fff;background: rgba(0,0,0,.05);"><i class="fa fa-search"></i></span>
+                        <input type="text" name="SearchString" placeholder="Leita af viðskiptavin..." value="@ViewBag.CurrentFilter" class="Search search-query form-control no-padding-hr" style="border:none;background: #fff;min-width:100%;background: rgba(0,0,0,.05);">
                     </div>
-
-                    <!-- Margin -->
-                    <div class="visible-xs clearfix form-group-margin"></div>
-
-                    <!-- Search field -->
-                    <form action="" class="pull-right col-xs-12 col-sm-6">
-                        <div class="input-group no-margin">
-                            <span class="input-group-addon" style="border:none;background: #fff;background: rgba(0,0,0,.05);"><i class="fa fa-search"></i></span>
-                            <input type="text" placeholder="Leita af viðskiptavin..." class="form-control no-padding-hr" style="border:none;background: #fff;min-width:100%;background: rgba(0,0,0,.05);">
-                        </div>
-                    </form>
-                </div>
+                }
             </div>
-        </div>
-    </div> <!-- / .page-header -->
-</div>
-
-    <!--@*<div class="panel">
-        <div class="panel-heading">
-            <span class="panel-title">Yfirlit yfir viðskiptavini</span>
-        </div>
-        <div class="panel-body">
-            <div id="custom-search-input">
-                <div class="input-group col-md-8">
-                    <!--<input type="text" class="form-control search-query" placeholder="Leita eftir nafni..." />-->
-                    @using (Html.BeginForm())
-                    {
-                        @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "Search form-control search-query" })
-                    }
-                </div>
-            </div>
-        </div>
-    </div>*@-->
-
-    <div class="panel">
-        <div class="panel-heading">
-            <span class="panel-title">
-                Viðskiptavinir
-            </span>
-        </div>
-        <div class="panel-body">
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th>
-                            @Html.ActionLink("Nafn", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
-                        </th>
-                        <th>
-                            @Html.ActionLink("Sími", "Index", new { sortOrder = ViewBag.PhoneSortParm, currentFilter = ViewBag.CurrentFilter })
-                        </th>
-                        <th>
-                            @Html.ActionLink("Tölvupóstur", "Index", new { sortOrder = ViewBag.EmailSortParm, currentFilter = ViewBag.CurrentFilter })
-                        </th>
-                        <th>
-                            @Html.ActionLink("Heimilisfang", "Index", new { sortOrder = ViewBag.AddressSortParm, currentFilter = ViewBag.CurrentFilter })
-                        </th>
-                        <th>
-                            @Html.ActionLink("Skráður", "Index", new { sortOrder = ViewBag.RegisteredSortParm, currentFilter = ViewBag.CurrentFilter })
-                        </th>
-                        <th>
-                            @Html.ActionLink("Fyrirtæki", "Index", new { sortOrder = ViewBag.CompanySortParm, currentFilter = ViewBag.CurrentFilter })
-                        </th>
-                    </tr>
-                </thead>
-
-                <tbody>
-                    @foreach (var client in Model)
-                    {
-                        <tr>
-                            <td>
-                                @Html.ActionLink(client.Name, "Details/" + client.ID)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => client.Phone)
-                            </td>
-                            <td>
-                                <a href="mailto:client.Email" target="_top">@Html.DisplayFor(modelItem => client.Email)</a>
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => client.Address)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => client.Registered)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => client.Company)
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-
-            <br />
-            Bls @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) af @Model.PageCount
-
-            @Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
         </div>
     </div>
+</div> <!-- / .page-header -->
+
+
+<div class="panel">
+    <div class="panel-heading">
+        <span class="panel-title">
+            Viðskiptavinir
+        </span>
+    </div>
+    <div class="panel-body">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.ActionLink("Nafn", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+                    </th>
+                    <th>
+                        @Html.ActionLink("Sími", "Index", new { sortOrder = ViewBag.PhoneSortParm, currentFilter = ViewBag.CurrentFilter })
+                    </th>
+                    <th>
+                        @Html.ActionLink("Tölvupóstur", "Index", new { sortOrder = ViewBag.EmailSortParm, currentFilter = ViewBag.CurrentFilter })
+                    </th>
+                    <th>
+                        @Html.ActionLink("Heimilisfang", "Index", new { sortOrder = ViewBag.AddressSortParm, currentFilter = ViewBag.CurrentFilter })
+                    </th>
+                    <th>
+                        @Html.ActionLink("Skráður", "Index", new { sortOrder = ViewBag.RegisteredSortParm, currentFilter = ViewBag.CurrentFilter })
+                    </th>
+                    <th>
+                        @Html.ActionLink("Fyrirtæki", "Index", new { sortOrder = ViewBag.CompanySortParm, currentFilter = ViewBag.CurrentFilter })
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var client in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.ActionLink(client.Name, "Details/" + client.ID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => client.Phone)
+                        </td>
+                        <td>
+                            <a href="mailto:client.Email" target="_top">@Html.DisplayFor(modelItem => client.Email)</a>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => client.Address)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => client.Registered)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => client.Company)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <br />
+        Bls @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) af @Model.PageCount
+
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+    </div>
+</div>
 
 

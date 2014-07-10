@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using Company.Models;
 using Company.DAL;
 using Company.Repositories;
+using PagedList;
 
 namespace Company.Controllers
 {
@@ -24,10 +25,77 @@ namespace Company.Controllers
 		}
 
         // GET: /Expense/
-        public ActionResult Index()
+		public ActionResult Index(string sortOrder, string searchString, string currentFilter, int? page)
         {
 			var expenses = expenseRepo.GetExpenses();
-            return View(expenses);
+
+			#region leitarvél
+			if (!String.IsNullOrEmpty(searchString))
+			{
+				expenses = expenses.Where(e => e.Title.ToUpper().Contains(searchString.ToUpper()) || e.Title.ToUpper().Contains(searchString.ToUpper())).ToList();
+			}
+			#endregion
+
+			#region ViewBags
+			ViewBag.CurrentSort = sortOrder;
+			ViewBag.TitleSortParm = String.IsNullOrEmpty(sortOrder) ? "title_desc" : "";
+			ViewBag.DescriptionSortParm = sortOrder == "Description" ? "description_desc" : "Description";
+			ViewBag.RegisteredSortParm = sortOrder == "Registered" ? "registered_desc" : "Registered";
+			ViewBag.ProjectSortParm = sortOrder == "Project" ? "project_desc" : "Project";
+			ViewBag.AmountSortParm = sortOrder == "Amount" ? "amoung_desc" : "Amount";
+
+			if (searchString != null)
+			{
+				page = 1;
+			}
+			else
+			{
+				searchString = currentFilter;
+			}
+
+			ViewBag.CurrentFilter = searchString;
+
+			#endregion
+
+			#region switch for sortOrder
+			switch (sortOrder)
+			{
+				case "title_desc":
+					expenses = expenses.OrderByDescending(e => e.Project.Client.Name).ToList();
+					break;
+				case "Description":
+					expenses = expenses.OrderBy(e => e.Description).ToList();
+					break;
+				case "description_desc":
+					expenses = expenses.OrderByDescending(e => e.Description).ToList();
+					break;
+				case "Registered":
+					expenses = expenses.OrderBy(e => e.Registered).ToList();
+					break;
+				case "registered_desc":
+					expenses = expenses.OrderByDescending(e => e.Registered).ToList();
+					break;
+				case "Project":
+					expenses = expenses.OrderBy(e => e.Project.Title).ToList();
+					break;
+				case "project_desc":
+					expenses = expenses.OrderByDescending(e => e.Project.Title).ToList();
+					break;
+				case "Amount":
+					expenses = expenses.OrderBy(e => e.Amount).ToList();
+					break;
+				case "amount_desc":
+					expenses = expenses.OrderByDescending(e => e.Amount).ToList();
+					break;
+				default:
+					expenses = expenses.OrderBy(e => e.Title).ToList();
+					break;
+			}
+			#endregion
+
+			int pageSize = 10;
+			int pageNumber = (page ?? 1);
+			return View(expenses.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: /Expense/Details/5

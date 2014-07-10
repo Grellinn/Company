@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using Company.Models;
 using Company.DAL;
 using Company.Repositories;
+using PagedList;
 
 namespace Company.Controllers
 {
@@ -24,10 +25,80 @@ namespace Company.Controllers
 		}
 		
 		// GET: /Income/
-        public ActionResult Index()
+		public ActionResult Index(string sortOrder, string searchString, string currentFilter, int? page)
         {
 			var incomes = incomeRepo.GetIncomes();
-            return View(incomes);
+
+
+			#region leitarvél
+			if (!String.IsNullOrEmpty(searchString))
+			{
+				incomes = incomes.Where(i => i.Title.ToUpper().Contains(searchString.ToUpper()) || i.Title.ToUpper().Contains(searchString.ToUpper())).ToList();
+			}
+			#endregion
+
+			#region ViewBags
+			ViewBag.CurrentSort = sortOrder;
+			ViewBag.TitleSortParm = String.IsNullOrEmpty(sortOrder) ? "title_desc" : "";
+			ViewBag.DescriptionSortParm = sortOrder == "Description" ? "description_desc" : "Description";
+			ViewBag.RegisteredSortParm = sortOrder == "Registered" ? "registered_desc" : "Registered";
+			ViewBag.ClientSortParm = sortOrder == "Client" ? "client_desc" : "Client";
+			ViewBag.ProjectSortParm = sortOrder == "Project" ? "project_desc" : "Project";
+			ViewBag.AmountSortParm = sortOrder == "Amount" ? "amoung_desc" : "Amount";
+
+			if (searchString != null)
+			{
+				page = 1;
+			}
+			else
+			{
+				searchString = currentFilter;
+			}
+
+			ViewBag.CurrentFilter = searchString;
+
+			#endregion
+
+			#region switch for sortOrder
+			switch (sortOrder)
+			{
+				case "title_desc":
+					incomes = incomes.OrderByDescending(i => i.Project.Client.Name).ToList();
+					break;
+				case "Description":
+					incomes = incomes.OrderBy(i => i.Description).ToList();
+					break;
+				case "description_desc":
+					incomes = incomes.OrderByDescending(i => i.Description).ToList();
+					break;
+				case "Registered":
+					incomes = incomes.OrderBy(i => i.Registered).ToList();
+					break;
+				case "registered_desc":
+					incomes = incomes.OrderByDescending(i => i.Registered).ToList();
+					break;
+				case "Project":
+					incomes = incomes.OrderBy(i => i.Project.Title).ToList();
+					break;
+				case "project_desc":
+					incomes = incomes.OrderByDescending(i => i.Project.Title).ToList();
+					break;
+				case "Amount":
+					incomes = incomes.OrderBy(i => i.Amount).ToList();
+					break;
+				case "amount_desc":
+					incomes = incomes.OrderByDescending(i => i.Amount).ToList();
+					break;
+				default:
+					incomes = incomes.OrderBy(i => i.Title).ToList();
+					break;
+			}
+			#endregion
+
+
+			int pageSize = 10;
+			int pageNumber = (page ?? 1);
+			return View(incomes.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: /Income/Details/5

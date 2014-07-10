@@ -1,17 +1,39 @@
-﻿@model IEnumerable<Company.Models.Expense>
+﻿@model PagedList.IPagedList<Company.Models.Expense>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
 @{
     ViewBag.Title = "Yfirlit yfir gjöld";
 }
 
-<div class="panel">
-    <div class="panel-heading">
-        <span class="panel-title">Gjöld</span>
+<div class="page-header">
+    <div class="row">
+        <!-- Page header, center on small screens -->
+        <h1 class="col-xs-12 col-sm-4 text-left-sm"><i class="fa fa-users page-header-icon"></i>&nbsp;&nbsp;Gjöld &amp; Kostnaður</h1>
+
+        <div class="col-xs-12 col-sm-8">
+            <div class="row">
+                <hr class="visible-xs no-grid-gutter-h">
+                <!-- "Create project" button, width=auto on desktops -->
+                <div class="pull-right col-xs-12 col-sm-auto">
+                    <a href="/Expense/Create" class="btn btn-primary btn-labeled" style="width: 100%;"><span class="btn-label icon fa fa-plus"></span>Skrá ný gjöld</a>
+                </div>
+
+                <!-- Margin -->
+                <div class="visible-xs clearfix form-group-margin"></div>
+
+                <!-- Search field -->
+                @using (Html.BeginForm("Index", "Expense", FormMethod.Get, new { @class="pull-right col-xs-12 col-sm-6" }))
+                {     
+                    <div class="input-group no-margin">
+                        <span class="input-group-addon" style="border:none;background: #fff;background: rgba(0,0,0,.05);"><i class="fa fa-search"></i></span>
+                        <input type="text" name="SearchString" placeholder="Leita af kostnaði..." value="@ViewBag.CurrentFilter" class="Search search-query form-control no-padding-hr" style="border:none;background: #fff;min-width:100%;background: rgba(0,0,0,.05);">
+                    </div>
+                }
+            </div>
+        </div>
     </div>
-    <div class="panel-body">
-        @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary pull-right" })
-    </div>
-</div>
+</div> <!-- / .page-header -->
 
 <div class="panel">
     <div class="panel-heading">
@@ -21,19 +43,19 @@
         <table class="table">
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.Title)
+                    @Html.ActionLink("Titill", "Index", new { sortOrder = ViewBag.TitleSortParm, currentFilter = ViewBag.CurrentFilter })
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Description)
+                    @Html.ActionLink("Lýsing", "Index", new { sortOrder = ViewBag.DescriptionSortParm, currentFilter = ViewBag.CurrentFilter })
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Registered)
+                    @Html.ActionLink("Skráð", "Index", new { sortOrder = ViewBag.RegisteredSortParm, currentFilter = ViewBag.CurrentFilter })
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Project)
+                    @Html.ActionLink("Verkefni", "Index", new { sortOrder = ViewBag.ProjectSortParm, currentFilter = ViewBag.CurrentFilter })
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Amount)
+                    @Html.ActionLink("Upphæð", "Index", new { sortOrder = ViewBag.AmountSortParm, currentFilter = ViewBag.CurrentFilter })
                 </th>
             </tr>
 
@@ -57,8 +79,11 @@
                     </td>
                 </tr>
             }
-
         </table>
+        <br />
+        Bls @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) af @Model.PageCount
+
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
     </div>
 </div>
 

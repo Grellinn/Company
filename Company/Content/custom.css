@@ -444,9 +444,8 @@ a.stat-cell:hover {
 .page-header {
     background: #edece7;
     border-color: #E9E9E9;
-    border-bottom: 1px solid #e4e4e4;
-    border-top: 1px solid #e4e4e4;
-    margin: -18px -18px 18px -18px;
+    border-bottom: 1px solid #dddddd;
+    border-top: 1px solid #dddddd;
     padding: 20px 18px;
 }
 
@@ -524,13 +523,6 @@ hr {
 
 .btn.btn-labeled .btn-label.icon {
     font-size: 14px;
-}
-
-#content-wrapper {
-    left: 0;
-    padding-top: 40px;
-    width: 100%;
-    position: relative;
 }
 
 @media (min-width: 768px) {
