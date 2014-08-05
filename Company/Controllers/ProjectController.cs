@@ -10,6 +10,7 @@ using Company.Models;
 using Company.DAL;
 using Company.Repositories;
 using PagedList;
+using System.Web.Script.Serialization;
 
 namespace Company.Controllers
 {
@@ -109,6 +110,7 @@ namespace Company.Controllers
         // GET: /Project/Details/5
         public ActionResult Details(int id)
         {
+			ViewBag.jss = GetMorrisData(id);
 			Project project = projectRepo.GetProjectByID(id);
             return View(project);
         }
@@ -220,6 +222,90 @@ namespace Company.Controllers
 			projectRepo.Save();
 
 			return RedirectToAction("Details/" + project.ID);
+		}
+
+		// GET: /Project/MorrisData
+		public string GetMorrisData (int id)
+		{
+			Project tempProject = projectRepo.GetProjectByID(id);
+			List<MorrisData> Data = new List<MorrisData>();
+			int counter;
+
+			if (tempProject.FinishDate != null)
+			{
+				double tempLength = (Convert.ToDateTime(tempProject.FinishDate) - Convert.ToDateTime(tempProject.StartedDate)).TotalDays;
+				counter = Convert.ToInt32(tempLength);
+			}
+			else
+			{
+				double tempLength = (Convert.ToDateTime(tempProject.StartedDate) - DateTime.Now).TotalDays;
+				counter = Convert.ToInt32(tempLength);
+			}
+
+			for (int i = 0; i < counter; i++)
+			{
+				if (i == 0)
+				{
+					MorrisData tempData = new MorrisData();
+					string tempDate = tempProject.StartedDate.ToString();
+					tempData.Date = Convert.ToDateTime(tempProject.StartedDate).ToString("yyyy-MM-dd");
+					#region get incomes
+					foreach (var income in tempProject.Incomes)
+					{
+						if (income.Registered.ToString() == tempDate)
+						{
+							tempData.Income += income.Amount;
+						}
+					}
+					#endregion
+					#region get expenses
+					foreach (var expense in tempProject.Expenses)
+					{
+						if (expense.Registered.ToString() == tempDate)
+						{
+							tempData.Expense += expense.Amount;
+						}
+					}
+					#endregion
+					tempData.ProfitLoss = tempData.Income - tempData.Expense;
+
+					Data.Add(tempData);
+				}
+				else 
+				{
+					MorrisData tempData = new MorrisData();
+					string tempDate = Convert.ToDateTime(tempProject.StartedDate).AddDays(i).ToString();
+					tempData.Date = Convert.ToDateTime(tempProject.StartedDate).AddDays(i).ToString("yyyy-MM-dd");					
+					
+					foreach (var income in tempProject.Incomes)
+					{
+						if (income.Registered.ToString() == tempDate)
+						{
+							tempData.Income += income.Amount;
+						}
+					}
+					tempData.Income += Data[i - 1].Income;
+					foreach (var expense in tempProject.Expenses)
+					{
+						if (expense.Registered.ToString() == tempDate)
+						{
+							tempData.Expense += expense.Amount;
+						}
+					}
+					tempData.Expense += Data[i - 1].Expense;
+					tempData.ProfitLoss = tempData.Income - tempData.Expense;
+
+					Data.Add(tempData);
+				}
+			}
+
+			JavaScriptSerializer jss = new JavaScriptSerializer();
+
+			string output = jss.Serialize(Data);
+
+			string demo = output.Replace("\"", "");
+
+			return demo;
 		}
 
         protected override void Dispose(bool disposing)

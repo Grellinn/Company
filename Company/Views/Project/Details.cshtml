@@ -3,97 +3,208 @@
 @{
     ViewBag.Title = "Upplýsingar - Verkefni";
 }
+
+<script>var init = [];</script>
+
 <div class="row">
-    <div class="col-md-4">
+    
         <div class="panel">
-            <div class="panel-heading">
-                <span class="panel-title">Breyta stöðu verkefnis</span>
+            <div class="panel-heading project">
+                <span class="panel-title"><i class="fa fa-folder-open"></i>  Upplýsingar um verkefni</span>
+                <span><a href="~/Project/ProjectStarted/@Model.ID" class="fa fa-refresh" style="color:white"></a></span>
+                <span><a href="~/Project/ProjectFinished/@Model.ID" class="fa fa-check" style="color:white"></a></span>
+                <span class="pull-right">
+                    <a href="~/Project/Edit/@Model.ID" class="fa fa-edit" style="color:white"></a>
+                    <a href="~/Project/Delete/@Model.ID" class="fa fa-trash-o" style="color:white"></a>
+                </span>
             </div>
             <div class="panel-body">
-                @Html.ActionLink("Til baka í lista", "Index", "Project", null, new { @class = "btn btn-primary" })
-                @Html.ActionLink("Verkefni hafið", "ProjectStarted/" + Model.ID, "Project", null, new { @class = "btn btn-warning pull-right" })
-                @Html.ActionLink("Verkefni lokið", "ProjectFinished/" + Model.ID, "Project", null, new { @class = "btn btn-success" })
-            </div>
-        </div>
-    </div>
+                <div class="col-md-6">
+                    <table class="table table-user-information">
+                        <tbody>
+                            <tr>
+                                <td>@Html.DisplayNameFor(model => model.Title)</td>
+                                <td>@Html.DisplayFor(model => model.Title)</td>
+                            </tr>
+                            <tr>
+                                <td>@Html.DisplayNameFor(model => model.Client)</td>
+                                <td>@Html.ActionLink(Model.Client.Name, "Details/" + Model.ClientID, "Client")</td>
+                            </tr>
+                            <tr>
+                                <td>@Html.DisplayNameFor(model => model.Address)</td>
+                                <td>@Html.DisplayFor(model => model.Address)</td>
+                            </tr>
+                            <tr>
+                                <td>@Html.DisplayNameFor(model => model.Client.ZipCode)</td>
+                                <td>@Html.DisplayFor(model => model.Client.ZipCode)</td>
+                            </tr>
+                            <tr>
+                                <td>@Html.DisplayNameFor(model => model.Details)</td>
+                                <td>@Html.DisplayFor(model => model.Details)</td>
+                            </tr>
+                            <tr>
+                                <td>@Html.DisplayNameFor(model => model.Status)</td>
+                                <td>@Html.DisplayFor(model => model.Status)</td>
+                            </tr>
+                            <tr>
+                                <td>@Html.DisplayNameFor(model => model.RegisteredDate)</td>
+                                <td>@Html.DisplayFor(model => model.RegisteredDate)</td>
+                            </tr>
+                            <tr>
+                                <td>@Html.DisplayNameFor(model => model.StartedDate)</td>
+                                <td>@Html.DisplayFor(model => model.StartedDate)</td>
+                            </tr>
+                            <tr>
+                                <td>@Html.DisplayNameFor(model => model.FinishDate)</td>
+                                <td>@Html.DisplayFor(model => model.FinishDate)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-6">
+                    <!-- 5. $UPLOADS_CHART ======== Uploads chart -->
+                    @*<!-- Javascript -->
+            <script>
+                    init.push(function () {
+                        var uploads_data = [
+                            { day: '2014-03-10', v: 20 },
+                            { day: '2014-03-11', v: 10 },
+                            { day: '2014-03-12', v: 15 },
+                            { day: '2014-03-13', v: 12 },
+                            { day: '2014-03-14', v: 5 },
+                            { day: '2014-03-15', v: 5 },
+                            { day: '2014-03-16', v: 20 }
+                        ];
+                        Morris.Line({
+                            element: 'hero-graph',
+                            data: uploads_data,
+                            xkey: 'day',
+                            ykeys: ['v'],
+                            labels: ['Value'],
+                            lineColors: ['#fff'],
+                            lineWidth: 2,
+                            pointSize: 4,
+                            gridLineColor: 'rgba(255,255,255,.5)',
+                            resize: true,
+                            gridTextColor: '#fff',
+                            xLabels: "day",
+                            xLabelFormat: function (d) {
+                                return ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][d.getMonth()] + ' ' + d.getDate();
+                            },
+                        });
+                    });
+            </script>
+            <!-- / Javascript -->
 
-    <div class="col-md-4">
-        <div class="panel">
-            <div class="panel-heading">
-                <span class="panel-title">Bæta við Tekjum / Gjöldum</span>
-            </div>
-            <div class="panel-body">
-                @Html.ActionLink("Bæta við tekjum", "Create", "Income", null, new { @class = "btn btn-success pull-left" })
-                @Html.ActionLink("Bæta við gjöldum", "Create", "Expense", null, new { @class = "btn btn-danger pull-right" })
-            </div>
-        </div>
-    </div>
+            <div class="stat-panel">
+                <div class="stat-row">
+                    <!-- Small horizontal padding, bordered, without right border, top aligned text -->
+                    <div class="stat-cell col-sm-4 padding-sm-hr bordered no-border-r valign-top">
+                        <!-- Small padding, without top padding, extra small horizontal padding -->
+                        <h4 class="padding-sm no-padding-t padding-xs-hr"><i class="fa fa-cloud-upload text-primary"></i>&nbsp;&nbsp;Uploads</h4>
+                        <!-- Without margin -->
+                        <ul class="list-group no-margin">
+                            <!-- Without left and right borders, extra small horizontal padding, without background, no border radius -->
+                            <li class="list-group-item no-border-hr padding-xs-hr no-bg no-border-radius">
+                                Documents <span class="label label-pa-purple pull-right">34</span>
+                            </li> <!-- / .list-group-item -->
+                            <!-- Without left and right borders, extra small horizontal padding, without background -->
+                            <li class="list-group-item no-border-hr padding-xs-hr no-bg">
+                                Audio <span class="label label-danger pull-right">128</span>
+                            </li> <!-- / .list-group-item -->
+                            <!-- Without left and right borders, without bottom border, extra small horizontal padding, without background -->
+                            <li class="list-group-item no-border-hr no-border-b padding-xs-hr no-bg">
+                                Videos <span class="label label-success pull-right">12</span>
+                            </li> <!-- / .list-group-item -->
+                        </ul>
+                    </div> <!-- /.stat-cell -->
+                    <!-- Primary background, small padding, vertically centered text -->
+                    <div class="stat-cell col-sm-8 bg-primary padding-sm valign-middle">
+                        <div id="hero-graph" class="graph" style="height: 230px;"></div>
+                    </div>
+                </div>
+            </div> <!-- /.stat-panel -->
+            <!-- /5. $UPLOADS_CHART -->*@
+                    <link rel="stylesheet" href="http://cdn.oesmith.co.uk/morris-0.5.1.css">
+                    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+                    <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+                    <script src="http://cdn.oesmith.co.uk/morris-0.5.1.min.js"></script>
 
-    <div class="col-md-4">
-        <div class="panel">
-            <div class="panel-heading">
-                <span class="panel-title">Breyta / Eyða Verkefni</span>
-            </div>
-            <div class="panel-body">
-                @Html.ActionLink("Breyta verkefni", "Edit/" + Model.ID, "Project", null, new { @class = "btn btn-success pull-left" })
-                @Html.ActionLink("Eyða verkefni", "Delete/" + Model.ID, "Project", null, new { @class = "btn btn-danger pull-right" })
-            </div>
+                    <!-- Javascript -->
+                    <script>
+                        init.push(function () {
+                            Morris.Area({
+                                element: 'hero-area',
+                                data: @ViewBag.jss ,
+                                xkey: 'Date',
+                                ykeys: ['Income', 'ProfitLoss', 'Expense'],
+                                labels: ['Tekjur', 'Hagnaður / Tap', 'Gjöld'],
+                                hideHover: 'auto',
+                                lineColors: PixelAdmin.settings.consts.COLORS,
+                                fillOpacity: 0.3,
+                                behaveLikeLine: true,
+                                lineWidth: 2,
+                                pointSize: 4,
+                                gridLineColor: '#cfcfcf',
+                                resize: true
+                            });
+                        });
+                    </script>
+                    <!-- / Javascript -->
+                    <div class="note note-info">Línuritið sýnir tekjur, gjöld og hagnað</div>
+
+                    <div class="graph-container">
+                        <div id="hero-area" class="graph"></div>
+                    </div> 
+                </div>
         </div>
     </div>
 </div>
 
 <div class="row">
-    <div class="col-lg-6">
-        <div class="panel">
-            <div class="panel-heading project">
-                <span class="panel-title"><i class="fa fa-folder-open"></i>Upplýsingar um verkefni</span>
+    <div class="col-md-6">
+        <div class="col-md-6">
+            <div class="panel">
+                <div class="panel-heading">
+                    <span class="panel-title">@Html.DisplayNameFor(model => model.TotalIncome)</span>
+                </div>
+                <div class="panel-body">
+                    <h2 align="center">@Html.DisplayFor(model => model.TotalIncome)<small> kr.</small></h2>
+                </div>
             </div>
-            <div class="panel-body">
-                <table class="table table-user-information">
-                    <tbody>
-                        <tr>
-                            <td>@Html.DisplayNameFor(model => model.Title)</td>
-                            <td>@Html.DisplayFor(model => model.Title)</td>
-                        </tr>
-                        <tr>
-                            <td>@Html.DisplayNameFor(model => model.Client)</td>
-                            <td>@Html.ActionLink(Model.Client.Name, "Details/" + Model.ClientID, "Client")</td>
-                        </tr>
-                        <tr>
-                            <td>@Html.DisplayNameFor(model => model.Address)</td>
-                            <td>@Html.DisplayFor(model => model.Address)</td>
-                        </tr>
-                        <tr>
-                            <td>@Html.DisplayNameFor(model => model.Client.ZipCode)</td>
-                            <td>@Html.DisplayFor(model => model.Client.ZipCode)</td>
-                        </tr>
-                        <tr>
-                            <td>@Html.DisplayNameFor(model => model.Details)</td>
-                            <td>@Html.DisplayFor(model => model.Details)</td>
-                        </tr>
-                        <tr>
-                            <td>@Html.DisplayNameFor(model => model.Status)</td>
-                            <td>@Html.DisplayFor(model => model.Status)</td>
-                        </tr>
-                        <tr>
-                            <td>@Html.DisplayNameFor(model => model.RegisteredDate)</td>
-                            <td>@Html.DisplayFor(model => model.RegisteredDate)</td>
-                        </tr>
-                        <tr>
-                            <td>@Html.DisplayNameFor(model => model.StartedDate)</td>
-                            <td>@Html.DisplayFor(model => model.StartedDate)</td>
-                        </tr>
-                        <tr>
-                            <td>@Html.DisplayNameFor(model => model.FinishDate)</td>
-                            <td>@Html.DisplayFor(model => model.FinishDate)</td>
-                        </tr>
-                    </tbody>
-                </table>
+        </div>
+        <div class="col-md-6">
+            <div class="panel">
+                <div class="panel-heading">
+                    <span class="panel-title">@Html.DisplayNameFor(model => model.NumberOfHours)</span>
+                </div>
+                <div class="panel-body">
+                    <h2 align="center">@Html.DisplayFor(model => model.NumberOfHours)<small> dagar</small></h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="panel">
+                <div class="panel-heading">
+                    <span class="panel-title">@Html.DisplayNameFor(model => model.TotalExpense)</span>
+                </div>
+                <div class="panel-body">
+                    <h2 align="center">@Html.DisplayFor(model => model.TotalExpense)<small> kr.</small></h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="panel">
+                <div class="panel-heading">
+                    <span class="panel-title">Hagnaður / Tap</span>
+                </div>
+                <div class="panel-body">
+                    <h2 align="center">@{ int tempProfitLoss = Convert.ToInt32(Model.TotalIncome - Model.TotalExpense); <span>@tempProfitLoss</span> }<small> kr.</small></h2>
+                </div>
             </div>
         </div>
     </div>
-
-    <div class="col-lg-6">
+    <div class="col-md-6">
         <div class="panel">
             <div class="panel-heading">
                 <span class="panel-title">Staðsetning á korti</span>
@@ -104,147 +215,119 @@
                 <div style="overflow:hidden;height:350px;width:500px;">
                     <div id="gmap_canvas" style="height:500px;width:600px;"></div>
                     <script type="text/javascript">
-                    function init_map() {
-                        var myOptions = {
-                            zoom: 14,
-                            center: new google.maps.LatLng(64.144262, -21.860669),
-                            mapTypeId: google.maps.MapTypeId.ROADMAP
-                        };
-                        map = new google.maps.Map(document.getElementById("gmap_canvas"), myOptions);
-                        marker = new google.maps.Marker({ map: map, position: new google.maps.LatLng(64.144262, -21.860669) });
-                        infowindow = new google.maps.InfoWindow({ content: "<b>Kaffihúsið</b><br/>Hjallavegur 1<br/> 104 Reykjavík" });
-                        google.maps.event.addListener(marker, "click", function () { infowindow.open(map, marker); });
-                        infowindow.open(map, marker);
-                    }
-                    google.maps.event.addDomListener(window, 'load', init_map);
+                        function init_map() {
+                            var myOptions = {
+                                zoom: 14,
+                                center: new google.maps.LatLng(64.144262, -21.860669),
+                                mapTypeId: google.maps.MapTypeId.ROADMAP
+                            };
+                            map = new google.maps.Map(document.getElementById("gmap_canvas"), myOptions);
+                            marker = new google.maps.Marker({ map: map, position: new google.maps.LatLng(64.144262, -21.860669) });
+                            infowindow = new google.maps.InfoWindow({ content: "<b>Kaffihúsið</b><br/>Hjallavegur 1<br/> 104 Reykjavík" });
+                            google.maps.event.addListener(marker, "click", function () { infowindow.open(map, marker); });
+                            infowindow.open(map, marker);
+                        }
+                        google.maps.event.addDomListener(window, 'load', init_map);
                     </script>
                 </div>
             </div>
-        </div>
+         </div>
     </div>
 </div>
 
 <div class="row">
-    <div class="col-md-3">
+    <div class="col-lg-6">
         <div class="panel">
-            <div class="panel-heading">
-                <span class="panel-title">@Html.DisplayNameFor(model => model.TotalIncome)</span>
+            <div class="panel-heading income">
+                <span class="panel-title">Listi yfir tekjur</span>
+                <span class="pull-right"><a href="~/Income/Create"><i class="fa fa-plus" style="color:white"></i></a></span>
             </div>
             <div class="panel-body">
-                <h2 align="center">@Html.DisplayFor(model => model.TotalIncome)<small> kr.</small></h2>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Titill</th>
+                            <th>Lýsing</th>
+                            <th>Skráð</th>
+                            <th>Viðskiptavinur</th>
+                            <th>Upphæð</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var income in Model.Incomes.OrderByDescending(i => i.Registered).Take(5))
+                    {
+                            <tr>
+                                <td>
+                                    @Html.ActionLink(income.Title, "Details/" + income.ID, "Income")
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => income.Description)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => income.Registered)
+                                </td>
+                                <td>
+                                    @Html.ActionLink(income.Project.Client.Name, "Details/" + income.Project.ClientID, "Client")
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => income.Amount)
+                                </td>
+                            </tr>
+                    }
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
-    <div class="col-md-3">
+
+    <div class="col-lg-6">
         <div class="panel">
-            <div class="panel-heading">
-                <span class="panel-title">@Html.DisplayNameFor(model => model.NumberOfHours)</span>
+            <div class="panel-heading expense">
+                <span class="panel-title">Listi yfir gjöld</span>
+                <span class="pull-right"><a href="~/Expense/Create"><i class="fa fa-plus" style="color:white"></i></a></span>
             </div>
             <div class="panel-body">
-                <h2 align="center">@Html.DisplayFor(model => model.NumberOfHours)<small> dagar</small></h2>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="panel">
-            <div class="panel-heading">
-                <span class="panel-title">@Html.DisplayNameFor(model => model.TotalExpense)</span>
-            </div>
-            <div class="panel-body">
-                <h2 align="center">@Html.DisplayFor(model => model.TotalExpense)<small> kr.</small></h2>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="panel">
-            <div class="panel-heading">
-                <span class="panel-title">Hagnaður / Tap</span>
-            </div>
-            <div class="panel-body">
-                <h2 align="center">@{ int tempProfitLoss = Convert.ToInt32(Model.TotalIncome - Model.TotalExpense); <span>@tempProfitLoss</span> }<small> kr.</small></h2>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Titill</th>
+                            <th>Lýsing</th>
+                            <th>Skráð</th>
+                            <th>Upphæð</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var expense in Model.Expenses.OrderByDescending(e => e.Registered).Take(5))
+                    {
+                            <tr>
+                                <td>
+                                    @Html.ActionLink(expense.Title, "Details/" + expense.ID, "Expense")
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => expense.Description)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => expense.Registered)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => expense.Amount)
+                                </td>
+                            </tr>
+                    }
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
 </div>
 
-<div class="col-lg-6">
-    <div class="panel">
-        <div class="panel-heading income">
-            <span class="panel-title"><i class="fa fa-plus"></i> Listi yfir tekjur</span>
-        </div>
-        <div class="panel-body">
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th>Titill</th>
-                        <th>Lýsing</th>
-                        <th>Skráð</th>
-                        <th>Viðskiptavinur</th>
-                        <th>Upphæð</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var income in Model.Incomes.OrderByDescending(i => i.Registered).Take(5))
-                    {
-                        <tr>
-                            <td>
-                                @Html.ActionLink(income.Title, "Details/" + income.ID, "Income")
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => income.Description)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => income.Registered)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => @Model.Client.Name)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => income.Amount)
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
+@Html.ActionLink("Til baka í lista", "Index", "Project", null, new { @class = "btn btn-primary" })
 
-<div class="col-lg-6">
-    <div class="panel">
-        <div class="panel-heading expense">
-            <span class="panel-title"><i class="fa fa-minus"></i> Listi yfir gjöld</span>
-        </div>
-        <div class="panel-body">
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th>Titill</th>
-                        <th>Lýsing</th>
-                        <th>Skráð</th>
-                        <th>Upphæð</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var expense in Model.Expenses.OrderByDescending(e => e.Registered).Take(5))
-                    {
-                        <tr>
-                            <td>
-                                @Html.ActionLink(expense.Title, "Details/" + expense.ID, "Expense")
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => expense.Description)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => expense.Registered)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => expense.Amount)
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
+<script src="~/Scripts/pixel-admin.min.js"></script>
+
+<script type="text/javascript">
+    init.push(function () {
+        // Javascript code here
+    });
+    window.PixelAdmin.start(init);
+</script>

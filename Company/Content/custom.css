@@ -530,3 +530,41 @@ hr {
         width: auto;
     }
 }
+
+.no-border-r {
+    border-right-width:0!important;
+}
+
+.bordered {
+    border: 1px solid #e4e4e4;
+}
+
+.valign-top, 
+.valign-top td,
+.valign-top th {
+    vertical-align:top!important;
+}
+
+.padding-sm-hr {
+    padding-left:15px!important;
+    padding-right:15px!important;
+}
+
+.label-pa-purple {
+    background:#857198;
+}
+
+.bg-primary {
+    background:#1d89cf!important;
+}
+
+.valign-middle,
+.valign-middle td,
+.valign-middle th {
+    vertical-align:middle!important;
+}
+
+padding-sm {
+    padding:10px 15px!important;
+}
+
