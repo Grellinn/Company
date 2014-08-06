@@ -111,7 +111,9 @@ namespace Company.Controllers
         // GET: /Project/Details/5
         public ActionResult Details(int id)
         {
-			ViewBag.jss = GetMorrisData(id);
+			//ViewBag.jss = GetMorrisData(id);
+			string json = GetMorrisData(id);
+			ViewBag.jss = new HtmlString(json);
 			Project project = projectRepo.GetProjectByID(id);
             return View(project);
         }
@@ -249,7 +251,7 @@ namespace Company.Controllers
 				{
 					MorrisData tempData = new MorrisData();
 					DateTime tempDate = Convert.ToDateTime(tempProject.StartedDate);
-					tempData.Date = Convert.ToDateTime(tempProject.StartedDate).ToString("dd-MM-yyyy");
+					tempData.Date = "\'" + Convert.ToDateTime(tempProject.StartedDate).ToString("yyyy-MM-dd") + "\'";
 					#region get incomes
 					foreach (var income in tempProject.Incomes)
 					{
@@ -276,7 +278,7 @@ namespace Company.Controllers
 				{
 					MorrisData tempData = new MorrisData();
 					DateTime tempDate = Convert.ToDateTime(tempProject.StartedDate).AddDays(i);
-					tempData.Date = Convert.ToDateTime(tempProject.StartedDate).AddDays(i).ToString("dd-MM-yyyy");					
+					tempData.Date = "\'" + Convert.ToDateTime(tempProject.StartedDate).AddDays(i).ToString("yyyy-MM-dd") + "\'";					
 					
 					foreach (var income in tempProject.Incomes)
 					{

@@ -129,29 +129,24 @@
                     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
                     <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
                     <script src="http://cdn.oesmith.co.uk/morris-0.5.1.min.js"></script>
-
                     <!-- Javascript -->
                     <script>
                         init.push(function () {
                             Morris.Area({
                                 element: 'hero-area',
-                                data: @ViewBag.jss ,
+                                data: @ViewBag.jss,
                                 xkey: 'Date',
                                 ykeys: ['Income', 'ProfitLoss', 'Expense'],
                                 labels: ['Tekjur', 'Hagnaður / Tap', 'Gjöld'],
-                                hideHover: 'auto',
-                               /* xLabelFormat: function(date) {
-                                    return date.getDate()+'/'+(date.getMonth()+1)+'/'+date.getFullYear(); 
+                                xLabels: "day",
+                                xLabelFormat: function (d) {
+                                    return ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][d.getMonth()] + ' ' + d.getDate();
                                 },
-                                xLabels:'day',*/
+                                hideHover: 'auto',
                                 lineColors: PixelAdmin.settings.consts.COLORS,
                                 fillOpacity: 0.3,
                                 behaveLikeLine: true,
                                 lineWidth: 2,
-                                dateFormat: function(date) {
-                                    d = new Date(date);
-                                    return d.getDate()+'/'+(d.getMonth()+1)+'/'+d.getFullYear(); 
-                                },
                                 pointSize: 4,
                                 gridLineColor: '#cfcfcf',
                                 resize: true
