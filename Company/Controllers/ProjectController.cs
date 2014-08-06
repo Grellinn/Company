@@ -11,6 +11,7 @@ using Company.DAL;
 using Company.Repositories;
 using PagedList;
 using System.Web.Script.Serialization;
+using Newtonsoft.Json;
 
 namespace Company.Controllers
 {
@@ -247,12 +248,12 @@ namespace Company.Controllers
 				if (i == 0)
 				{
 					MorrisData tempData = new MorrisData();
-					string tempDate = tempProject.StartedDate.ToString();
-					tempData.Date = Convert.ToDateTime(tempProject.StartedDate).ToString("yyyy-MM-dd");
+					DateTime tempDate = Convert.ToDateTime(tempProject.StartedDate);
+					tempData.Date = Convert.ToDateTime(tempProject.StartedDate).ToString("dd-MM-yyyy");
 					#region get incomes
 					foreach (var income in tempProject.Incomes)
 					{
-						if (income.Registered.ToString() == tempDate)
+						if (income.Registered == tempDate)
 						{
 							tempData.Income += income.Amount;
 						}
@@ -261,7 +262,7 @@ namespace Company.Controllers
 					#region get expenses
 					foreach (var expense in tempProject.Expenses)
 					{
-						if (expense.Registered.ToString() == tempDate)
+						if (expense.Registered == tempDate)
 						{
 							tempData.Expense += expense.Amount;
 						}
@@ -274,12 +275,12 @@ namespace Company.Controllers
 				else 
 				{
 					MorrisData tempData = new MorrisData();
-					string tempDate = Convert.ToDateTime(tempProject.StartedDate).AddDays(i).ToString();
-					tempData.Date = Convert.ToDateTime(tempProject.StartedDate).AddDays(i).ToString("yyyy-MM-dd");					
+					DateTime tempDate = Convert.ToDateTime(tempProject.StartedDate).AddDays(i);
+					tempData.Date = Convert.ToDateTime(tempProject.StartedDate).AddDays(i).ToString("dd-MM-yyyy");					
 					
 					foreach (var income in tempProject.Incomes)
 					{
-						if (income.Registered.ToString() == tempDate)
+						if (income.Registered == tempDate)
 						{
 							tempData.Income += income.Amount;
 						}
@@ -287,7 +288,7 @@ namespace Company.Controllers
 					tempData.Income += Data[i - 1].Income;
 					foreach (var expense in tempProject.Expenses)
 					{
-						if (expense.Registered.ToString() == tempDate)
+						if (expense.Registered == tempDate)
 						{
 							tempData.Expense += expense.Amount;
 						}
@@ -299,11 +300,11 @@ namespace Company.Controllers
 				}
 			}
 
-			JavaScriptSerializer jss = new JavaScriptSerializer();
+			//JavaScriptSerializer jss = new JavaScriptSerializer();
 
-			string output = jss.Serialize(Data);
-
-			string demo = output.Replace("\"", "");
+			//string output = jss.Serialize(Data);
+			string outputJ = JsonConvert.SerializeObject(Data);
+			string demo = outputJ.Replace("\"", "");
 
 			return demo;
 		}

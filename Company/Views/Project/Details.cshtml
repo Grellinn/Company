@@ -140,10 +140,18 @@
                                 ykeys: ['Income', 'ProfitLoss', 'Expense'],
                                 labels: ['Tekjur', 'Hagnaður / Tap', 'Gjöld'],
                                 hideHover: 'auto',
+                               /* xLabelFormat: function(date) {
+                                    return date.getDate()+'/'+(date.getMonth()+1)+'/'+date.getFullYear(); 
+                                },
+                                xLabels:'day',*/
                                 lineColors: PixelAdmin.settings.consts.COLORS,
                                 fillOpacity: 0.3,
                                 behaveLikeLine: true,
                                 lineWidth: 2,
+                                dateFormat: function(date) {
+                                    d = new Date(date);
+                                    return d.getDate()+'/'+(d.getMonth()+1)+'/'+d.getFullYear(); 
+                                },
                                 pointSize: 4,
                                 gridLineColor: '#cfcfcf',
                                 resize: true
