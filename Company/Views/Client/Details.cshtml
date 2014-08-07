@@ -4,24 +4,14 @@
     ViewBag.Title = "Yfirlit";
 }
 
-<div class="panel">
-    <div class="panel-heading project">
-        <span class="panel-title">@Model.Name</span>
-    </div>
-    <div class="panel-body">
-        @Html.ActionLink("Til baka í lista", "Index", "Client", new { @class = "btn btn-primary" })
-        <div class="pull-right">
-            <a href="mailto:@Model.Email" data-original-title="Broadcast Message" data-toggle="tooltip" type="button" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-envelope"></i></a>
-            @Html.ActionLink("Breyta viðskiptavin", "Edit/" + @Model.ID, "Client", new { @class = "btn btn-success" })
-            @Html.ActionLink("Eyða viðskiptavin", "Delete/" + @Model.ID, "Client", new { @class = "btn btn-danger" })
-        </div>
-    </div>
-</div>
-
 
 <div class="panel">
     <div class="panel-heading project">
         <span class="panel-title">Yfirlit yfir viðskiptavin</span>
+        <span class="pull-right">
+            <a href="~/Project/Edit/@Model.ID" class="fa fa-edit" style="color:white"></a>
+            <a href="~/Project/Delete/@Model.ID" class="fa fa-trash-o" style="color:white"></a>
+        </span>
     </div>
     <div class="panel-body">
         <div>
@@ -265,3 +255,5 @@
         </div>
     </div>
 </div>
+
+@Html.ActionLink("Til baka í lista", "Index", "Client", new { @class = "btn btn-primary" })
