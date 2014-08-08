@@ -183,7 +183,9 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Client.cs" />
+    <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\Expense.cs" />
+    <Compile Include="Models\Hour.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Income.cs" />
     <Compile Include="Models\MorrisData.cs" />
