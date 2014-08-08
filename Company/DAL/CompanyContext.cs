@@ -19,6 +19,8 @@ namespace Company.DAL
 		public DbSet<Project> Projects { get; set; }
 		public DbSet<Income> Incomes { get; set; }
 		public DbSet<Expense> Expenses { get; set; }
+		public DbSet<Hour> Hours { get; set; }
+		public DbSet<Employee> Employees { get; set; }
 
 		protected override void OnModelCreating(DbModelBuilder modelBuilder)
 		{

@@ -1,0 +1,114 @@
+﻿@model Company.Models.Hour
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Hour</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Employee.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Employee.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Project.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Project.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DayStart)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DayStart)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MorgningBreakStop)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MorgningBreakStop)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MorgningBreakStart)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MorgningBreakStart)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LunchStop)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LunchStop)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LunchStart)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LunchStart)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DayBreakStop)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DayBreakStop)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DayBreakStart)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DayBreakStart)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DayStop)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DayStop)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WorkTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WorkTime)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

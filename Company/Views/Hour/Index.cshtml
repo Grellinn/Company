@@ -1,0 +1,99 @@
+﻿@model IEnumerable<Company.Models.Hour>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Employee.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Project.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DayStart)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MorgningBreakStop)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MorgningBreakStart)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LunchStop)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LunchStart)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DayBreakStop)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DayBreakStart)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DayStop)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.WorkTime)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Employee.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Project.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DayStart)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MorgningBreakStop)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MorgningBreakStart)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LunchStop)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LunchStart)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DayBreakStop)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DayBreakStart)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DayStop)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.WorkTime)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>
