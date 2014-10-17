@@ -1,120 +1,123 @@
 ﻿@model Company.Models.Employee
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Breyta starfsmanni";
 }
 
-<h2>Edit</h2>
 
+<div class="panel">
+    <div class="panel-heading">
+        <span class="panel-title">Breyta starfsmanni</span>
+    </div>
+    <div class="panel-body">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Employee</h4>
-        <hr />
-        @Html.ValidationSummary(true)
-        @Html.HiddenFor(model => model.ID)
+            <div class="form-horizontal">
+                @Html.ValidationSummary(true)
+                @Html.HiddenFor(model => model.ID)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Name)
-                @Html.ValidationMessageFor(model => model.Name)
+                <div class="form-group">
+                    <p class="control-label col-md-2">Nafn</p>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Name)
+                        @Html.ValidationMessageFor(model => model.Name)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <p class="control-label col-md-2">Staða innan fyrirtækis</p>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Role)
+                        @Html.ValidationMessageFor(model => model.Role)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <p class="control-label col-md-2">Heimilisfang</p>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Address)
+                        @Html.ValidationMessageFor(model => model.Address)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <p class="control-label col-md-2">Sími</p>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Phone)
+                        @Html.ValidationMessageFor(model => model.Phone)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <p class="control-label col-md-2">Tölvupóstur</p>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Email)
+                        @Html.ValidationMessageFor(model => model.Email)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <p class="control-label col-md-2">Hóf störf</p>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Started)
+                        @Html.ValidationMessageFor(model => model.Started)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <p class="control-label col-md-2">Lauk störfum</p>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Quit)
+                        @Html.ValidationMessageFor(model => model.Quit)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <p class="control-label col-md-2">Kennitala</p>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.SSN)
+                        @Html.ValidationMessageFor(model => model.SSN)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <p class="control-label col-md-2">Bankareikningur</p>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.AccountNr)
+                        @Html.ValidationMessageFor(model => model.AccountNr)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <p class="control-label col-md-2">Tímakaup</p>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.WPH)
+                        @Html.ValidationMessageFor(model => model.WPH)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <p class="control-label col-md-2">Upplýsingar</p>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Details)
+                        @Html.ValidationMessageFor(model => model.Details)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Uppfæra" class="btn btn-primary" />
+                    </div>
+                </div>
             </div>
-        </div>
+        }
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Address, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Address)
-                @Html.ValidationMessageFor(model => model.Address)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Details, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Details)
-                @Html.ValidationMessageFor(model => model.Details)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.SSN, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.SSN)
-                @Html.ValidationMessageFor(model => model.SSN)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.AccountNr, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.AccountNr)
-                @Html.ValidationMessageFor(model => model.AccountNr)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Phone, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Phone)
-                @Html.ValidationMessageFor(model => model.Phone)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Email, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Email)
-                @Html.ValidationMessageFor(model => model.Email)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Role, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Role)
-                @Html.ValidationMessageFor(model => model.Role)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Started, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Started)
-                @Html.ValidationMessageFor(model => model.Started)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Quit, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Quit)
-                @Html.ValidationMessageFor(model => model.Quit)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.WPH, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.WPH)
-                @Html.ValidationMessageFor(model => model.WPH)
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
+        <div>
+            @Html.ActionLink("Til baka í lista", "Index")
         </div>
     </div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
 </div>
 
 @section Scripts {

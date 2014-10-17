@@ -1,112 +1,67 @@
 ﻿@model Company.Models.Employee
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Eyða starfsmanni";
 }
+<div class="panel">
+    <div class="panel-heading">
+        <span class="panel-title">Eyða starfsmanni</span>
+    </div>
+    <div class="panel-body">
+        <h3>Ertu viss um að þú viljir eyða @Model.Name ?</h3>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Name):
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Role):
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Role)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.SSN):
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.SSN)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Address):
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Address)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Phone):
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Phone)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Email):
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Started):
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Started)
+            </dd>
+        </dl>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
 
-<h2>Delete</h2>
-
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>Employee</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Address)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Address)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Details)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Details)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.SSN)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.SSN)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.AccountNr)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.AccountNr)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Phone)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Phone)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Role)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Role)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Started)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Started)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Quit)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Quit)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.WPH)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.WPH)
-        </dd>
-
-    </dl>
-
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
-        </div>
-    }
+            <div class="form-actions no-color">
+                <input type="submit" value="Eyða" class="btn btn-danger" /> |
+                @Html.ActionLink("Til baka á starfsmannalista", "Index")
+            </div>
+        }
+    </div>
 </div>

@@ -1,106 +1,139 @@
 ﻿@model Company.Models.Employee
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Yfirlit";
 }
 
-<h2>Details</h2>
+<div class="panel">
+    <div class="panel-heading project">
+        <span class="panel-title">Yfirlit yfir starfsmann</span>
+        <span class="pull-right">
+            <a href="~/Employee/Edit/@Model.ID" class="fa fa-edit" style="color:white"></a>
+            <a href="~/Employee/Delete/@Model.ID" class="fa fa-trash-o" style="color:white"></a>
+        </span>
+    </div>
+    <div class="panel-body">
+        <div>
+            <div class="pull-left col-xs-6 col-sm-6 col-md-6 col-lg-6 toppad">
+                <div>
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><strong>@Model.Name</strong></h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-3 col-lg-3 " align="center"><img alt="User Pic" src="~/Content/img/gretar.png" class="img-circle"> </div>
+                            <div class=" col-md-9 col-lg-9 ">
+                                <table class="table table-user-information">
+                                    <tbody>
+                                        <tr>
+                                            <td>@Html.DisplayNameFor(model => model.Role)</td>
+                                            <td>@Html.DisplayFor(model => model.Role)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>@Html.DisplayNameFor(model => model.Phone)</td>
+                                            <td>@Html.DisplayFor(model => model.Phone)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>@Html.DisplayNameFor(model => model.Email)</td>
+                                            <td><a href="mailto:@Model.Email">@Html.DisplayFor(model => model.Email)</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>@Html.DisplayNameFor(model => model.SSN)</td>
+                                            <td>@Html.DisplayFor(model => model.SSN)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>@Html.DisplayNameFor(model => model.AccountNr)</td>
+                                            <td>@Html.DisplayFor(model => model.AccountNr)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>@Html.DisplayNameFor(model => model.Address)</td>
+                                            <td>@Html.DisplayFor(model => model.Address)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>@Html.DisplayNameFor(model => model.Started)</td>
+                                            <td>@Html.DisplayFor(model => model.Started)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>@Html.DisplayNameFor(model => model.Quit)</td>
+                                            <td>@Html.DisplayFor(model => model.Quit)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>@Html.DisplayNameFor(model => model.WPH)</td>
+                                            <td>@Html.DisplayFor(model => model.WPH)</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="pull-left col-xs-6 col-sm-6 col-md-6 col-lg-6 toppad">
+                <div>
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><strong>Upplýsingar um <small>@Html.DisplayFor(model => model.Name)</small></strong></h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class=" col-md-12 col-lg-12 ">
+                                <table class="table table-user-information">
+                                    <tbody>
+                                        <tr>
+                                            <td>Fjöldi klst</td>
+                                            <td>@Model.Hours.Count() <span> tímar unnir</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Heildarlaun greidd</td>
+                                            <td>
+                                                @{
+                                                    double tempTotalSalaries = 0;
+                                                    double tempTotalHours = Convert.ToDouble(Model.Hours.Count());
+                                                    double WPH = Model.WPH;
 
-<div>
-    <h4>Employee</h4>
-	<hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Address)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Address)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Details)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Details)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.SSN)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.SSN)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.AccountNr)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.AccountNr)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Phone)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Phone)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Role)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Role)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Started)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Started)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Quit)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Quit)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.WPH)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.WPH)
-        </dd>
-
-    </dl>
+                                                    tempTotalSalaries = WPH * tempTotalHours;
+                                                    
+                                                    <span>@tempTotalSalaries<span> kr.</span></span>
+                                                }
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Fjöldi verkefna</td>
+                                            <td>
+                                                @{
+                                                    int tempTotalProjects = Model.Projects.Count();
+                                                                                                        
+                                                    <span>@tempTotalProjects<span> stk</span></span>
+                                                }
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Starfstími í árum</td>
+                                            <td>
+                                                @{
+                                                    int yearsWorked = Model.Quit.Year - Model.Started.Year;
+                                                    int daysWorked = Model.Quit.DayOfYear - Model.Started.DayOfYear;
+                                                    
+                                                    <span>@yearsWorked<span> ár</span><span> @daysWorked <span> dagar</span></span></span>
+                                                }
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>@Html.DisplayNameFor(model => model.Details)</td>
+                                            <td>@Html.DisplayFor(model => model.Details)</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary" })
 </p>
